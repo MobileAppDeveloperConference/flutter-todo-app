@@ -1,6 +1,6 @@
 # flutter_todo_app
 
-A new Flutter project.
+2023 MADC(Mobile App Developer Conference) Flutter Todo App
 
 ## Getting Started
 
