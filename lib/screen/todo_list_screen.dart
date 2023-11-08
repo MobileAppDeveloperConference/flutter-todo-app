@@ -3,6 +3,7 @@ import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/component/todo_add_floating_action_button.dart';
 import 'package:flutter_todo_app/component/todo_list_app_bar.dart';
 import 'package:flutter_todo_app/component/todo_list_bottom_navigation_bar.dart';
+import 'package:flutter_todo_app/screen/todo_add_task_screen.dart';
 
 class TodoListScreen extends StatefulWidget {
   const TodoListScreen({super.key});
@@ -27,7 +28,13 @@ class _TodoListScreenState extends State<TodoListScreen> {
         },
       ),
       floatingActionButton: TodoAddFloatingActionButton(
-        onAdd: () {},
+        onAdd: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const TodoAddTaskScreen(),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: TodoListBottomNavigationBar(
         selectedTodoTab: _selectedTodoTab,
