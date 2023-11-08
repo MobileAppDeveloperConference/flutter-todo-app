@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
 
-class TodoBottomNavigationBar extends StatelessWidget {
+class TodoListBottomNavigationBar extends StatelessWidget {
   final TodoTab selectedTodoTab;
   final Function(TodoTab tappedTab) onTap;
-  const TodoBottomNavigationBar({
+  const TodoListBottomNavigationBar({
     super.key,
     required this.selectedTodoTab,
     required this.onTap,

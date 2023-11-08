@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
 
-class TodoHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TodoTab selectedTodoTab;
   final bool isHideFinished;
   final Function() onToggleHideFinished;
-  const TodoHomeAppBar({
+  const TodoListAppBar({
     super.key,
     required this.selectedTodoTab,
     required this.onToggleHideFinished,
