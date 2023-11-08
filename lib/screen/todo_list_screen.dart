@@ -4,13 +4,13 @@ import 'package:flutter_todo_app/component/todo_add_floating_action_button.dart'
 import 'package:flutter_todo_app/component/todo_home_app_bar.dart';
 import 'package:flutter_todo_app/component/todo_bottom_navigation_bar.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class TodoListScreen extends StatefulWidget {
+  const TodoListScreen({super.key});
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<TodoListScreen> createState() => _TodoListScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TodoListScreenState extends State<TodoListScreen> {
   TodoTab _selectedTodoTab = TodoTab.all;
   bool _isHideFinished = false;
   @override

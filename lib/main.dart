@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_todo_app/screen/home_screen.dart';
+import 'package:flutter_todo_app/screen/todo_list_screen.dart';
 
 void main() {
   runApp(const TodoApp());
@@ -19,7 +19,7 @@ class TodoApp extends StatelessWidget {
           fontFamily: 'Pretendard',
           useMaterial3: true,
         ),
-        home: const HomeScreen(),
+        home: const TodoListScreen(),
       ),
     );
   }
