@@ -1,7 +1,7 @@
 name: flutter_todo_app
 description: "2023 MADC(Mobile App Developer Conference) Flutter Todo App"
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.6
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:
@@ -22,4 +23,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
 
+fonts:
+  - family: Pretendard
+    fonts:
+      - asset: assets/fonts/Pretendard-Regular.otf
+        weight: 400
+      - asset: assets/fonts/Pretendard-Medium.otf
+        weight: 500
+      - asset: assets/fonts/Pretendard-SemiBold.otf
+        weight: 600
