@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/component/custom_text_form_field.dart';
 import 'package:flutter_todo_app/component/todo_add_task_app_bar.dart';
 
-class TodoAddTaskScreen extends StatelessWidget {
-  const TodoAddTaskScreen({super.key});
+class TodoDetailTaskScreen extends StatelessWidget {
+  const TodoDetailTaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,7 @@ class TodoAddTaskScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 32, horizontal: 16),
           child: Column(
             children: [
-              SizedBox(
-                height: 32,
-              ),
+              SizedBox(height: 42),
               CustomTextFormField(
                 maxLength: 28,
                 maxLines: 1,

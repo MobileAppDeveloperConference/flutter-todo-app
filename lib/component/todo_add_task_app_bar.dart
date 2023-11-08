@@ -32,6 +32,7 @@ class TodoAddTaskAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: SizedBox(),
               ),
               GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
                 child: const Text(
                   '취소',
                   style: TextStyle(
