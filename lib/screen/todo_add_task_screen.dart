@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/component/custom_text_form_field.dart';
-import 'package:flutter_todo_app/component/todo_add_task_app_bar.dart';
+import 'package:flutter_todo_app/component/common/custom_text_form_field.dart';
+import 'package:flutter_todo_app/component/todo/todo_add_task_app_bar.dart';
 
 class TodoAddTaskScreen extends StatelessWidget {
   const TodoAddTaskScreen({super.key});
