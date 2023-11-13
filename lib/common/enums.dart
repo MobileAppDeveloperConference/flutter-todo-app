@@ -1,4 +1,4 @@
-enum TodoTab {
+enum TodoNavigations {
   all,
   importants,
 }

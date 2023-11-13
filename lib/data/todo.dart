@@ -1,13 +1,13 @@
 class Todo {
   final bool isCompleted;
-  final bool isFavorite;
+  final bool isImportant;
   final String title;
   final String description;
   final DateTime createdAt;
 
   Todo({
     required this.isCompleted,
-    required this.isFavorite,
+    required this.isImportant,
     required this.title,
     required this.description,
     required this.createdAt,
@@ -17,14 +17,14 @@ class Todo {
 
   Todo copyWith({
     bool? isCompleted,
-    bool? isFavorite,
+    bool? isImportant,
     String? title,
     String? description,
     DateTime? createdAt,
   }) {
     return Todo(
       isCompleted: isCompleted ?? this.isCompleted,
-      isFavorite: isFavorite ?? this.isFavorite,
+      isImportant: isImportant ?? this.isImportant,
       title: title ?? this.title,
       description: description ?? this.description,
       createdAt: createdAt ?? this.createdAt,
@@ -33,7 +33,7 @@ class Todo {
 
   factory Todo.fromJson(Map<String, dynamic> json) => Todo(
         isCompleted: json['isCompleted'] as bool,
-        isFavorite: json['isFavorite'] as bool,
+        isImportant: json['isImportant'] as bool,
         title: json['title'] as String,
         description: json['description'] as String,
         createdAt: DateTime.parse(json['createdAt'] as String),
@@ -41,7 +41,7 @@ class Todo {
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'isCompleted': isCompleted,
-        'isFavorite': isFavorite,
+        'isImportant': isImportant,
         'title': title,
         'description': description,
         'createdAt': createdAt.toIso8601String(),

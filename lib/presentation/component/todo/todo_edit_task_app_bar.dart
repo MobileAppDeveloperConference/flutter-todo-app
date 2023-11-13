@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star_toggle.dart';
 
 class TodoEditTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final bool initialFavorite;
+  final bool initialImportant;
   final VoidCallback onClose;
-  final Function(bool isFavorite) onChangedFavorite;
+  final Function(bool isImportant) onChangedImportant;
   const TodoEditTaskAppBar({
     super.key,
-    required this.initialFavorite,
+    required this.initialImportant,
     required this.onClose,
-    required this.onChangedFavorite,
+    required this.onChangedImportant,
   });
 
   @override
@@ -20,7 +20,7 @@ class TodoEditTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TodoEditTaskAppBarState extends State<TodoEditTaskAppBar> {
-  bool? isFavorite;
+  bool? isImportant;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _TodoEditTaskAppBarState extends State<TodoEditTaskAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    isFavorite ??= widget.initialFavorite;
+    isImportant ??= widget.initialImportant;
     return Container(
       color: Colors.white,
       child: Align(
@@ -45,11 +45,11 @@ class _TodoEditTaskAppBarState extends State<TodoEditTaskAppBar> {
               ),
               const SizedBox(width: 8),
               TodoAppBarStarToggle(
-                isFavorite: isFavorite!,
+                isImportant: isImportant!,
                 onTap: () {
                   setState(() {
-                    isFavorite = !isFavorite!;
-                    widget.onChangedFavorite(isFavorite!);
+                    isImportant = !isImportant!;
+                    widget.onChangedImportant(isImportant!);
                   });
                 },
               ),

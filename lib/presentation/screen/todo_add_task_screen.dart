@@ -19,12 +19,12 @@ class _TodoAddTaskScreenState extends State<TodoAddTaskScreen> {
     return Scaffold(
       appBar: TodoAddTaskAppBar(
         canAdd: _canAdd,
-        isFavorite: false,
-        onFinished: ({required bool isFavorite}) {
+        isImportant: false,
+        onFinished: (isImportant) {
           TodoModelInheritedNotifier.read(context).create(
             title: _title,
             description: _description,
-            isFavorite: isFavorite,
+            isImportant: isImportant,
           );
           Navigator.of(context).pop();
         },

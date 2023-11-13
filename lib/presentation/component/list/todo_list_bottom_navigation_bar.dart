@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/common/extensions.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/app_config_inherited_notifier.dart';
 
 class TodoListBottomNavigationBar extends StatelessWidget {
-  final TodoTab selectedTodoTab;
-  final Function(TodoTab tappedTab) onTap;
-  const TodoListBottomNavigationBar({
-    super.key,
-    required this.selectedTodoTab,
-    required this.onTap,
-  });
+  const TodoListBottomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appConfigModel = AppConfigModelInheritedNotifier.watch(context);
     return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -26,21 +21,25 @@ class TodoListBottomNavigationBar extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_home_${selectedTodoTab.isAll ? 'on' : 'off'}_2x.png',
+              'assets/images/icon_tap_home_${appConfigModel.isImportants ? 'off' : 'on'}_2x.png',
               scale: 2,
             ),
             label: '기본',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_star_${selectedTodoTab.isImportants ? 'on' : 'off'}_2x.png',
+              'assets/images/icon_tap_star_${appConfigModel.isImportants ? 'on' : 'off'}_2x.png',
               scale: 2,
             ),
             label: '중요',
           ),
         ],
-        currentIndex: TodoTab.values.indexOf(selectedTodoTab),
-        onTap: (index) => onTap(TodoTab.values.elementAt(index)),
+        currentIndex: appConfigModel.todoNavigationIndex,
+        onTap: (index) {
+          appConfigModel.setTodoNavigation(
+            TodoNavigations.values.elementAt(index),
+          );
+        },
         elevation: 0,
         selectedFontSize: 12,
         unselectedFontSize: 12,

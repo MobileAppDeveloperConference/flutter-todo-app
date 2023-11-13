@@ -54,13 +54,13 @@ class TodoItem extends StatelessWidget {
               const SizedBox(width: 16),
               InkWell(
                 onTap: () {
-                  TodoModelInheritedNotifier.read(context).setFavorite(
+                  TodoModelInheritedNotifier.read(context).setImportant(
                     todo: todo,
-                    isFavorite: !todo.isFavorite,
+                    isImportant: !todo.isImportant,
                   );
                 },
                 child: Image.asset(
-                  todo.isFavorite
+                  todo.isImportant
                       ? 'assets/images/icon_todo_star_on_2x.png'
                       : 'assets/images/icon_todo_star_off_2x.png',
                   scale: 2,

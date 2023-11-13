@@ -16,14 +16,14 @@ class TodoDetailTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TodoEditTaskAppBar(
-        initialFavorite: initialTodo.isFavorite,
+        initialImportant: initialTodo.isImportant,
         onClose: () {
           Navigator.of(context).pop();
         },
-        onChangedFavorite: (isFavorite) {
-          TodoModelInheritedNotifier.read(context).setFavorite(
+        onChangedImportant: (isImportant) {
+          TodoModelInheritedNotifier.read(context).setImportant(
             todo: initialTodo,
-            isFavorite: isFavorite,
+            isImportant: isImportant,
           );
         },
       ),

@@ -5,11 +5,11 @@ import 'package:flutter_todo_app/presentation/component/list/todo_item.dart';
 
 class TodoListSliverList extends StatelessWidget {
   final TodoFilters filter;
-  final bool isShowOnlyFavorite;
+  final bool isShowOnlyImportant;
   const TodoListSliverList({
     super.key,
     required this.filter,
-    required this.isShowOnlyFavorite,
+    required this.isShowOnlyImportant,
   });
 
   @override
@@ -17,8 +17,8 @@ class TodoListSliverList extends StatelessWidget {
     var todoList = TodoModelInheritedNotifier.watch(context).get(
       filter: filter,
     );
-    if (isShowOnlyFavorite) {
-      todoList = todoList.where((element) => element.isFavorite).toList();
+    if (isShowOnlyImportant) {
+      todoList = todoList.where((element) => element.isImportant).toList();
     }
     return SliverList.builder(
       itemCount: todoList.length,

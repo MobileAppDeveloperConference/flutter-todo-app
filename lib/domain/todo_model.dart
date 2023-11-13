@@ -4,10 +4,10 @@ import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/data/todo_repository.dart';
 
 class TodoModel extends ChangeNotifier {
-  final TodoRepository todoRepository;
+  final TodoRepository repository;
   List<Todo> todoList;
 
-  TodoModel({required this.todoRepository}) : todoList = todoRepository.load();
+  TodoModel({required this.repository}) : todoList = repository.load();
 
   bool get isEmpty => todoList.isEmpty;
   bool get isNotEmpty => !isEmpty;
@@ -22,7 +22,7 @@ class TodoModel extends ChangeNotifier {
   }
 
   void _saveAndNotify() {
-    todoRepository.save(todoList: todoList);
+    repository.save(todoList: todoList);
     notifyListeners();
   }
 
@@ -30,14 +30,14 @@ class TodoModel extends ChangeNotifier {
   // Todo 생성
   void create({
     required String title,
-    required bool isFavorite,
+    required bool isImportant,
     String? description,
   }) {
     todoList = [
       ...todoList,
       Todo(
         isCompleted: false,
-        isFavorite: isFavorite,
+        isImportant: isImportant,
         title: title,
         description: description ?? '',
         createdAt: DateTime.now(),
@@ -89,11 +89,11 @@ class TodoModel extends ChangeNotifier {
     _saveAndNotify();
   }
 
-  void setFavorite({required Todo todo, required bool isFavorite}) {
+  void setImportant({required Todo todo, required bool isImportant}) {
     final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
     if (targetTodoIndex != -1) {
       todoList[targetTodoIndex] =
-          todoList[targetTodoIndex].copyWith(isFavorite: isFavorite);
+          todoList[targetTodoIndex].copyWith(isImportant: isImportant);
     }
     _saveAndNotify();
   }
