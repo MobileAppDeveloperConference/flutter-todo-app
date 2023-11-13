@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/presentation/component/common/custom_text_form_field.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/todo/todo_edit_header.dart';
 import 'package:flutter_todo_app/presentation/component/todo/todo_edit_task_app_bar.dart';
 
@@ -16,14 +16,14 @@ class TodoDetailTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TodoEditTaskAppBar(
-        initialFavorite: initialTodo.isFavorite,
+        initialImportant: initialTodo.isImportant,
         onClose: () {
           Navigator.of(context).pop();
         },
-        onChangedFavorite: (isFavorite) {
-          TodoListInheritedNotifier.of(context).setFavorite(
+        onChangedImportant: (isImportant) {
+          TodoModelInheritedNotifier.read(context).setImportant(
             todo: initialTodo,
-            isFavorite: isFavorite,
+            isImportant: isImportant,
           );
         },
       ),
@@ -41,7 +41,7 @@ class TodoDetailTaskScreen extends StatelessWidget {
                 hintText: '투두를 입력해주세요.',
                 usingSuffix: true,
                 onChangedText: (text) {
-                  TodoListInheritedNotifier.of(context).setTitle(
+                  TodoModelInheritedNotifier.read(context).setTitle(
                     todo: initialTodo,
                     title: text,
                   );
@@ -55,7 +55,7 @@ class TodoDetailTaskScreen extends StatelessWidget {
                 hintText: '원한다면 투두에 설명도 추가할 수 있어요.',
                 usingSuffix: false,
                 onChangedText: (text) {
-                  TodoListInheritedNotifier.of(context).setDescription(
+                  TodoModelInheritedNotifier.read(context).setDescription(
                     todo: initialTodo,
                     description: text,
                   );

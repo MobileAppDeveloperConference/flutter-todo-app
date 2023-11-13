@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star_toggle.dart';
 
 class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool canAdd;
-  final bool isFavorite;
-  final Function({required bool isFavorite}) onFinished;
+  final bool isImportant;
+  final Function(bool isImportant) onFinished;
   const TodoAddTaskAppBar({
     super.key,
     required this.canAdd,
-    required this.isFavorite,
+    required this.isImportant,
     required this.onFinished,
   });
 
@@ -19,7 +20,7 @@ class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
-  bool? _isFavorite;
+  bool? isImportant;
 
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    _isFavorite ??= widget.isFavorite;
+    isImportant ??= widget.isImportant;
     return Container(
       color: Colors.white,
       child: Align(
@@ -43,18 +44,13 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
                 scale: 2,
               ),
               const SizedBox(width: 8),
-              InkWell(
+              TodoAppBarStarToggle(
+                isImportant: isImportant!,
                 onTap: () {
                   setState(() {
-                    _isFavorite = !_isFavorite!;
+                    isImportant = !isImportant!;
                   });
                 },
-                child: Image.asset(
-                  _isFavorite!
-                      ? 'assets/images/icon_star_on_2x.png'
-                      : 'assets/images/icon_star_off_2x.png',
-                  scale: 2,
-                ),
               ),
               const Expanded(
                 child: SizedBox(),
@@ -73,7 +69,7 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               const SizedBox(width: 26),
               InkWell(
                 onTap: widget.canAdd
-                    ? () => widget.onFinished(isFavorite: _isFavorite!)
+                    ? () => widget.onFinished(isImportant!)
                     : null,
                 child: Text(
                   '완료',

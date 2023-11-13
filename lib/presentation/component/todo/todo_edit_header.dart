@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/data/todo.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
 
 class TodoEditHeader extends StatefulWidget {
   final Todo initialTodo;
@@ -23,23 +25,18 @@ class _TodoEditHeaderState extends State<TodoEditHeader> {
       height: 62,
       child: Row(
         children: [
-          InkWell(
+          TodoToggle(
+            isCompleted: editingTodo.isCompleted,
             onTap: () {
               setState(() {
                 todo =
                     editingTodo.copyWith(isCompleted: !editingTodo.isCompleted);
-                TodoListInheritedNotifier.of(context).setComplete(
+                TodoModelInheritedNotifier.read(context).setComplete(
                   todo: editingTodo,
                   isCompleted: !editingTodo.isCompleted,
                 );
               });
             },
-            child: Image.asset(
-              editingTodo.isCompleted
-                  ? 'assets/images/icon_checked_2x.png'
-                  : 'assets/images/icon_not_checked_2x.png',
-              scale: 2,
-            ),
           ),
           const SizedBox(
             width: 16,
@@ -61,7 +58,7 @@ class _TodoEditHeaderState extends State<TodoEditHeader> {
           ),
           InkWell(
             onTap: () {
-              TodoListInheritedNotifier.of(context).delete(
+              TodoModelInheritedNotifier.read(context).delete(
                 todo: widget.initialTodo,
               );
               Navigator.of(context).pop();

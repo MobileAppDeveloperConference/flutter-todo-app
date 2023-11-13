@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/presentation/component/common/custom_text_form_field.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/todo/todo_add_task_app_bar.dart';
 
 class TodoAddTaskScreen extends StatefulWidget {
@@ -19,12 +19,12 @@ class _TodoAddTaskScreenState extends State<TodoAddTaskScreen> {
     return Scaffold(
       appBar: TodoAddTaskAppBar(
         canAdd: _canAdd,
-        isFavorite: false,
-        onFinished: ({required bool isFavorite}) {
-          TodoListInheritedNotifier.of(context).create(
+        isImportant: false,
+        onFinished: (isImportant) {
+          TodoModelInheritedNotifier.read(context).create(
             title: _title,
             description: _description,
-            isFavorite: isFavorite,
+            isImportant: isImportant,
           );
           Navigator.of(context).pop();
         },

@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/app_config_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_sliver_empty.dart';
-import 'package:flutter_todo_app/presentation/component/list/todos_app_bar.dart';
+import 'package:flutter_todo_app/presentation/component/list/todo_list_app_bar.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_bottom_navigation_bar.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_add_floating_action_button.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_sliver_list.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_sliver_title.dart';
 import 'package:flutter_todo_app/presentation/screen/todo_add_task_screen.dart';
 
-class TodoListScreen extends StatefulWidget {
+class TodoListScreen extends StatelessWidget {
   const TodoListScreen({super.key});
-  @override
-  State<TodoListScreen> createState() => _TodoListScreenState();
-}
 
-class _TodoListScreenState extends State<TodoListScreen> {
-  TodoTab _selectedTodoTab = TodoTab.all;
-  bool _isHideFinished = false;
   @override
   Widget build(BuildContext context) {
-    final todoListChangeNotifier = TodoListInheritedNotifier.of(context);
-    final bool isNotExistTodo = todoListChangeNotifier.isEmpty;
+    final todoModel = TodoModelInheritedNotifier.watch(context);
+    final appConfig = AppConfigModelInheritedNotifier.watch(context);
+    final bool isNotExistTodo = todoModel.isEmpty;
     final bool isShowFinishedTodo =
-        _isHideFinished == false && todoListChangeNotifier.isExistCompleted;
+        appConfig.isHiddenFinish == false && todoModel.isExistCompleted;
 
     return Scaffold(
       body: Container(
@@ -38,7 +34,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
             if (!isNotExistTodo)
               TodoListSliverList(
                 filter: TodoFilters.notCompleted,
-                isShowOnlyFavorite: _selectedTodoTab.isImportants,
+                isShowOnlyImportant: appConfig.isImportants,
               ),
             if (isShowFinishedTodo)
               const TodoListSliverTitle(
@@ -47,20 +43,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
             if (isShowFinishedTodo)
               TodoListSliverList(
                 filter: TodoFilters.completed,
-                isShowOnlyFavorite: _selectedTodoTab.isImportants,
+                isShowOnlyImportant: appConfig.isImportants,
               ),
           ],
         ),
       ),
-      appBar: TodoListAppBar(
-        selectedTodoTab: _selectedTodoTab,
-        isHideFinished: _isHideFinished,
-        onToggleHideFinished: () {
-          setState(() {
-            _isHideFinished = !_isHideFinished;
-          });
-        },
-      ),
+      appBar: const TodoListAppBar(),
       floatingActionButton: TodoAddFloatingActionButton(
         onAdd: () {
           Navigator.of(context).push(
@@ -70,14 +58,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
           );
         },
       ),
-      bottomNavigationBar: TodoListBottomNavigationBar(
-        selectedTodoTab: _selectedTodoTab,
-        onTap: (tappedTab) {
-          setState(() {
-            _selectedTodoTab = tappedTab;
-          });
-        },
-      ),
+      bottomNavigationBar: const TodoListBottomNavigationBar(),
     );
   }
 }

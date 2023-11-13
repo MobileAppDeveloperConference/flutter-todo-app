@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TodoListSliverEmpty extends StatelessWidget {
-  const TodoListSliverEmpty({
-    super.key,
-  });
+  const TodoListSliverEmpty({super.key});
 
   @override
   Widget build(BuildContext context) {

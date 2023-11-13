@@ -1,11 +1,6 @@
-enum TodoTab {
+enum TodoNavigations {
   all,
   importants,
-}
-
-extension TodoTabExtenstion on TodoTab {
-  bool get isAll => this == TodoTab.all;
-  bool get isImportants => this == TodoTab.importants;
 }
 
 enum TodoFilters {
