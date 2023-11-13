@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_todo_app/data/app_config_repository.dart';
 import 'package:flutter_todo_app/data/todo_repository.dart';
 import 'package:flutter_todo_app/domain/app_config_model.dart';
@@ -37,21 +36,18 @@ class TodoApp extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(390, 763),
-      child: AppConfigModelInheritedNotifier(
-        notifier: appConfigModel,
-        child: TodoModelInheritedNotifier(
-          notifier: todoModel,
-          child: MaterialApp(
-            title: 'Todo',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              fontFamily: 'Pretendard',
-              useMaterial3: true,
-            ),
-            home: const TodoListScreen(),
+    return AppConfigModelInheritedNotifier(
+      notifier: appConfigModel,
+      child: TodoModelInheritedNotifier(
+        notifier: todoModel,
+        child: MaterialApp(
+          title: 'Todo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Pretendard',
+            useMaterial3: true,
           ),
+          home: const TodoListScreen(),
         ),
       ),
     );
