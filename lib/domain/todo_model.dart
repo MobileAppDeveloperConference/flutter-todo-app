@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/data/todo.dart';
+import 'package:flutter_todo_app/data/todo_repository.dart';
 
 class TodoModel extends ChangeNotifier {
-  List<Todo> _todos = List.empty();
+  final TodoRepository todoRepository;
+  List<Todo> todoList;
 
-  bool get isEmpty => _todos.isEmpty;
+  TodoModel._({required this.todoList, required this.todoRepository});
+
+  factory TodoModel.load({required TodoRepository todoRepository}) {
+    return TodoModel._(
+      todoList: List.empty(),
+      todoRepository: todoRepository,
+    );
+  }
+
+  bool get isEmpty => todoList.isEmpty;
   bool get isNotEmpty => !isEmpty;
 
-  bool get isExistCompleted => _todos.any((element) => element.isCompleted);
+  bool get isExistCompleted => todoList.any((element) => element.isCompleted);
   bool get isNotExistCompleted => isExistCompleted;
 
   int _getTodoIndex({required DateTime createdAt}) {
-    return _todos.indexWhere(
+    return todoList.indexWhere(
       (e) => e.createdAt.isAtSameMomentAs(createdAt),
     );
   }
@@ -22,8 +33,8 @@ class TodoModel extends ChangeNotifier {
     required bool isFavorite,
     String? description,
   }) {
-    _todos = [
-      ..._todos,
+    todoList = [
+      ...todoList,
       Todo(
         isCompleted: false,
         isFavorite: isFavorite,
@@ -36,14 +47,14 @@ class TodoModel extends ChangeNotifier {
   }
 
   Iterable<Todo> get({required TodoFilters filter}) => switch (filter) {
-        TodoFilters.notCompleted => _todos.where((e) => e.isNotCompleted),
-        TodoFilters.completed => _todos.where((e) => e.isCompleted),
+        TodoFilters.notCompleted => todoList.where((e) => e.isNotCompleted),
+        TodoFilters.completed => todoList.where((e) => e.isCompleted),
       };
 
   void delete({
     required Todo todo,
   }) {
-    _todos = _todos
+    todoList = todoList
         .where((e) => !e.createdAt.isAtSameMomentAs(todo.createdAt))
         .toList();
     notifyListeners();
@@ -55,7 +66,8 @@ class TodoModel extends ChangeNotifier {
   }) {
     final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
     if (targetTodoIndex != -1) {
-      _todos[targetTodoIndex] = _todos[targetTodoIndex].copyWith(title: title);
+      todoList[targetTodoIndex] =
+          todoList[targetTodoIndex].copyWith(title: title);
     }
     notifyListeners();
   }
@@ -66,8 +78,8 @@ class TodoModel extends ChangeNotifier {
   }) {
     final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
     if (targetTodoIndex != -1) {
-      _todos[targetTodoIndex] =
-          _todos[targetTodoIndex].copyWith(description: description);
+      todoList[targetTodoIndex] =
+          todoList[targetTodoIndex].copyWith(description: description);
     }
     notifyListeners();
   }
@@ -75,8 +87,8 @@ class TodoModel extends ChangeNotifier {
   void setFavorite({required Todo todo, required bool isFavorite}) {
     final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
     if (targetTodoIndex != -1) {
-      _todos[targetTodoIndex] =
-          _todos[targetTodoIndex].copyWith(isFavorite: isFavorite);
+      todoList[targetTodoIndex] =
+          todoList[targetTodoIndex].copyWith(isFavorite: isFavorite);
     }
     notifyListeners();
   }
@@ -84,8 +96,8 @@ class TodoModel extends ChangeNotifier {
   void setComplete({required Todo todo, required bool isCompleted}) {
     final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
     if (targetTodoIndex != -1) {
-      _todos[targetTodoIndex] =
-          _todos[targetTodoIndex].copyWith(isCompleted: isCompleted);
+      todoList[targetTodoIndex] =
+          todoList[targetTodoIndex].copyWith(isCompleted: isCompleted);
     }
     notifyListeners();
   }

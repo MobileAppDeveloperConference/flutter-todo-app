@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_item.dart';
 
 class TodoListSliverList extends StatelessWidget {
@@ -14,8 +14,9 @@ class TodoListSliverList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var todoList =
-        TodoModelInheritedNotifier.watch(context).get(filter: filter);
+    var todoList = TodoModelInheritedNotifier.watch(context).get(
+      filter: filter,
+    );
     if (isShowOnlyFavorite) {
       todoList = todoList.where((element) => element.isFavorite).toList();
     }

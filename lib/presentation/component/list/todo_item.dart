@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/screen/todo_detail_task_screen.dart';
 
 class TodoItem extends StatelessWidget {
@@ -38,7 +38,18 @@ class TodoItem extends StatelessWidget {
               },
             ),
             const SizedBox(width: 16),
-            Expanded(child: Text(todo.title)),
+            Expanded(
+              child: Text(
+                todo.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: todo.isCompleted
+                      ? const Color.fromRGBO(204, 204, 204, 1)
+                      : Colors.black,
+                ),
+              ),
+            ),
             if (todo.isNotCompleted) ...[
               const SizedBox(width: 16),
               InkWell(

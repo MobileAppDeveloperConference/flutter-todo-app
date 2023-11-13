@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_sliver_empty.dart';
-import 'package:flutter_todo_app/presentation/component/list/todos_app_bar.dart';
+import 'package:flutter_todo_app/presentation/component/list/todo_list_app_bar.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_bottom_navigation_bar.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_add_floating_action_button.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_sliver_list.dart';
