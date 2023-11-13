@@ -26,6 +26,8 @@ class TodoModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  //----------------------------------------------------------------------------
+  // Todo 생성
   void create({
     required String title,
     required bool isFavorite,
@@ -44,11 +46,15 @@ class TodoModel extends ChangeNotifier {
     _saveAndNotify();
   }
 
+  //----------------------------------------------------------------------------
+  // Todo 읽기
   Iterable<Todo> get({required TodoFilters filter}) => switch (filter) {
         TodoFilters.notCompleted => todoList.where((e) => e.isNotCompleted),
         TodoFilters.completed => todoList.where((e) => e.isCompleted),
       };
 
+  //----------------------------------------------------------------------------
+  // Todo 삭제
   void delete({
     required Todo todo,
   }) {
@@ -58,6 +64,7 @@ class TodoModel extends ChangeNotifier {
     _saveAndNotify();
   }
 
+  // Todo 업데이트
   void setTitle({
     required Todo todo,
     required String title,
