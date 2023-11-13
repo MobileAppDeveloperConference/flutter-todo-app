@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatefulWidget {
   final int maxLength;
   final int maxLines;
+  final String? initialText;
   final String hintText;
   final bool usingSuffix;
   final Function(String text)? onChangedText;
   const CustomTextFormField({
     super.key,
+    this.initialText,
     required this.maxLength,
     required this.maxLines,
     required this.hintText,
@@ -29,6 +31,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   void initState() {
     super.initState();
     textEditingController.addListener(_onChangedText);
+    if (widget.initialText is String) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        textEditingController.text = widget.initialText!;
+      });
+    }
   }
 
   @override
