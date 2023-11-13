@@ -21,7 +21,7 @@ class TodoDetailTaskScreen extends StatelessWidget {
           Navigator.of(context).pop();
         },
         onChangedFavorite: (isFavorite) {
-          TodoListInheritedNotifier.of(context).setFavorite(
+          TodoModelInheritedNotifier.read(context).setFavorite(
             todo: initialTodo,
             isFavorite: isFavorite,
           );
@@ -41,7 +41,7 @@ class TodoDetailTaskScreen extends StatelessWidget {
                 hintText: '투두를 입력해주세요.',
                 usingSuffix: true,
                 onChangedText: (text) {
-                  TodoListInheritedNotifier.of(context).setTitle(
+                  TodoModelInheritedNotifier.read(context).setTitle(
                     todo: initialTodo,
                     title: text,
                   );
@@ -55,7 +55,7 @@ class TodoDetailTaskScreen extends StatelessWidget {
                 hintText: '원한다면 투두에 설명도 추가할 수 있어요.',
                 usingSuffix: false,
                 onChangedText: (text) {
-                  TodoListInheritedNotifier.of(context).setDescription(
+                  TodoModelInheritedNotifier.read(context).setDescription(
                     todo: initialTodo,
                     description: text,
                   );

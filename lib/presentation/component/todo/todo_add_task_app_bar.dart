@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star_toggle.dart';
 
 class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool canAdd;
@@ -19,7 +20,7 @@ class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
-  bool? _isFavorite;
+  bool? isFavorite;
 
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    _isFavorite ??= widget.isFavorite;
+    isFavorite ??= widget.isFavorite;
     return Container(
       color: Colors.white,
       child: Align(
@@ -43,18 +44,13 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
                 scale: 2,
               ),
               const SizedBox(width: 8),
-              InkWell(
+              TodoAppBarStarToggle(
+                isFavorite: isFavorite!,
                 onTap: () {
                   setState(() {
-                    _isFavorite = !_isFavorite!;
+                    isFavorite = !isFavorite!;
                   });
                 },
-                child: Image.asset(
-                  _isFavorite!
-                      ? 'assets/images/icon_star_on_2x.png'
-                      : 'assets/images/icon_star_off_2x.png',
-                  scale: 2,
-                ),
               ),
               const Expanded(
                 child: SizedBox(),
@@ -73,7 +69,7 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               const SizedBox(width: 26),
               InkWell(
                 onTap: widget.canAdd
-                    ? () => widget.onFinished(isFavorite: _isFavorite!)
+                    ? () => widget.onFinished(isFavorite: isFavorite!)
                     : null,
                 child: Text(
                   '완료',

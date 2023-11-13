@@ -30,7 +30,7 @@ class _TodoEditHeaderState extends State<TodoEditHeader> {
               setState(() {
                 todo =
                     editingTodo.copyWith(isCompleted: !editingTodo.isCompleted);
-                TodoListInheritedNotifier.of(context).setComplete(
+                TodoModelInheritedNotifier.read(context).setComplete(
                   todo: editingTodo,
                   isCompleted: !editingTodo.isCompleted,
                 );
@@ -57,7 +57,7 @@ class _TodoEditHeaderState extends State<TodoEditHeader> {
           ),
           InkWell(
             onTap: () {
-              TodoListInheritedNotifier.of(context).delete(
+              TodoModelInheritedNotifier.read(context).delete(
                 todo: widget.initialTodo,
               );
               Navigator.of(context).pop();

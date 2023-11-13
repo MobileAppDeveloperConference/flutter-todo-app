@@ -13,7 +13,6 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todoChangeNotifier = TodoListInheritedNotifier.of(context);
     return InkWell(
       onTap: () {
         Navigator.of(context).push(
@@ -32,7 +31,7 @@ class TodoItem extends StatelessWidget {
             TodoToggle(
               isCompleted: todo.isCompleted,
               onTap: () {
-                todoChangeNotifier.setComplete(
+                TodoModelInheritedNotifier.read(context).setComplete(
                   todo: todo,
                   isCompleted: !todo.isCompleted,
                 );
@@ -44,7 +43,7 @@ class TodoItem extends StatelessWidget {
               const SizedBox(width: 16),
               InkWell(
                 onTap: () {
-                  todoChangeNotifier.setFavorite(
+                  TodoModelInheritedNotifier.read(context).setFavorite(
                     todo: todo,
                     isFavorite: !todo.isFavorite,
                   );

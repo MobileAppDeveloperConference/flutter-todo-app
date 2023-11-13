@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_todo_app/domain/todo_list_change_notifier.dart';
+import 'package:flutter_todo_app/domain/todo_model.dart';
 import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/screen/todo_list_screen.dart';
 
@@ -14,8 +14,8 @@ class TodoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 763),
-      child: TodoListInheritedNotifier(
-        notifier: TodoListChangeNotifier(),
+      child: TodoModelInheritedNotifier(
+        notifier: TodoModel(),
         child: MaterialApp(
           title: 'Todo',
           debugShowCheckedModeBanner: false,

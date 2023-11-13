@@ -21,7 +21,7 @@ class _TodoAddTaskScreenState extends State<TodoAddTaskScreen> {
         canAdd: _canAdd,
         isFavorite: false,
         onFinished: ({required bool isFavorite}) {
-          TodoListInheritedNotifier.of(context).create(
+          TodoModelInheritedNotifier.read(context).create(
             title: _title,
             description: _description,
             isFavorite: isFavorite,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 
-class TodoListChangeNotifier extends ChangeNotifier {
+class TodoModel extends ChangeNotifier {
   List<Todo> _todos = List.empty();
 
   bool get isEmpty => _todos.isEmpty;

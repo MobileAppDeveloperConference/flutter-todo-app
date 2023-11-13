@@ -20,10 +20,10 @@ class _TodoListScreenState extends State<TodoListScreen> {
   bool _isHideFinished = false;
   @override
   Widget build(BuildContext context) {
-    final todoListChangeNotifier = TodoListInheritedNotifier.of(context);
-    final bool isNotExistTodo = todoListChangeNotifier.isEmpty;
+    final todoModel = TodoModelInheritedNotifier.watch(context);
+    final bool isNotExistTodo = todoModel.isEmpty;
     final bool isShowFinishedTodo =
-        _isHideFinished == false && todoListChangeNotifier.isExistCompleted;
+        _isHideFinished == false && todoModel.isExistCompleted;
 
     return Scaffold(
       body: Container(

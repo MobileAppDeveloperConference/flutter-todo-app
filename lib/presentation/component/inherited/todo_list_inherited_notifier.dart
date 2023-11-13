@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/domain/todo_list_change_notifier.dart';
+import 'package:flutter_todo_app/domain/todo_model.dart';
 
-class TodoListInheritedNotifier
-    extends InheritedNotifier<TodoListChangeNotifier> {
-  const TodoListInheritedNotifier({
+class TodoModelInheritedNotifier extends InheritedNotifier<TodoModel> {
+  const TodoModelInheritedNotifier({
     super.key,
     required super.notifier,
     required super.child,
   });
 
-  static TodoListChangeNotifier of(BuildContext context) {
+  static TodoModel watch(BuildContext context) {
     return context
-        .dependOnInheritedWidgetOfExactType<TodoListInheritedNotifier>()!
+        .dependOnInheritedWidgetOfExactType<TodoModelInheritedNotifier>()!
+        .notifier!;
+  }
+
+  static TodoModel read(BuildContext context) {
+    return context
+        .findAncestorWidgetOfExactType<TodoModelInheritedNotifier>()!
         .notifier!;
   }
 }

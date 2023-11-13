@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star_toggle.dart';
 
 class TodoEditTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool initialFavorite;
@@ -43,19 +44,14 @@ class _TodoEditTaskAppBarState extends State<TodoEditTaskAppBar> {
                 scale: 2,
               ),
               const SizedBox(width: 8),
-              InkWell(
+              TodoAppBarStarToggle(
+                isFavorite: isFavorite!,
                 onTap: () {
                   setState(() {
                     isFavorite = !isFavorite!;
                     widget.onChangedFavorite(isFavorite!);
                   });
                 },
-                child: Image.asset(
-                  isFavorite!
-                      ? 'assets/images/icon_star_on_2x.png'
-                      : 'assets/images/icon_star_off_2x.png',
-                  scale: 2,
-                ),
               ),
               const Expanded(
                 child: SizedBox(),

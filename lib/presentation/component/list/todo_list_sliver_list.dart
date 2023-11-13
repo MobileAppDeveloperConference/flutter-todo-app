@@ -14,7 +14,8 @@ class TodoListSliverList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var todoList = TodoListInheritedNotifier.of(context).get(filter: filter);
+    var todoList =
+        TodoModelInheritedNotifier.watch(context).get(filter: filter);
     if (isShowOnlyFavorite) {
       todoList = todoList.where((element) => element.isFavorite).toList();
     }
