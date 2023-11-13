@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/data/todo.dart';
+import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
 import 'package:flutter_todo_app/presentation/component/inherited/todo_list_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/screen/todo_detail_task_screen.dart';
 
@@ -28,19 +29,14 @@ class TodoItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(width: 16),
-            InkWell(
+            TodoToggle(
+              isCompleted: todo.isCompleted,
               onTap: () {
                 todoChangeNotifier.setComplete(
                   todo: todo,
                   isCompleted: !todo.isCompleted,
                 );
               },
-              child: Image.asset(
-                todo.isCompleted
-                    ? 'assets/images/icon_checked_2x.png'
-                    : 'assets/images/icon_not_checked_2x.png',
-                scale: 2,
-              ),
             ),
             const SizedBox(width: 16),
             Expanded(child: Text(todo.title)),
