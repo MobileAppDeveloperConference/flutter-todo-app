@@ -1,9 +1,6 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_todo_app/data/todo.dart';
 
-class TodoRepository {
-  final SharedPreferences sharedPreferences;
-
-  TodoRepository({
-    required this.sharedPreferences,
-  });
+abstract class TodoRepository {
+  List<Todo> load();
+  void save({required List<Todo> todoList});
 }

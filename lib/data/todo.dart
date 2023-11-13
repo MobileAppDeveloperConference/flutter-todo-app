@@ -30,4 +30,20 @@ class Todo {
       createdAt: createdAt ?? this.createdAt,
     );
   }
+
+  factory Todo.fromJson(Map<String, dynamic> json) => Todo(
+        isCompleted: json['isCompleted'] as bool,
+        isFavorite: json['isFavorite'] as bool,
+        title: json['title'] as String,
+        description: json['description'] as String,
+        createdAt: DateTime.parse(json['createdAt'] as String),
+      );
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'isCompleted': isCompleted,
+        'isFavorite': isFavorite,
+        'title': title,
+        'description': description,
+        'createdAt': createdAt.toIso8601String(),
+      };
 }

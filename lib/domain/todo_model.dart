@@ -7,14 +7,7 @@ class TodoModel extends ChangeNotifier {
   final TodoRepository todoRepository;
   List<Todo> todoList;
 
-  TodoModel._({required this.todoList, required this.todoRepository});
-
-  factory TodoModel.load({required TodoRepository todoRepository}) {
-    return TodoModel._(
-      todoList: List.empty(),
-      todoRepository: todoRepository,
-    );
-  }
+  TodoModel({required this.todoRepository}) : todoList = todoRepository.load();
 
   bool get isEmpty => todoList.isEmpty;
   bool get isNotEmpty => !isEmpty;
@@ -26,6 +19,11 @@ class TodoModel extends ChangeNotifier {
     return todoList.indexWhere(
       (e) => e.createdAt.isAtSameMomentAs(createdAt),
     );
+  }
+
+  void _saveAndNotify() {
+    todoRepository.save(todoList: todoList);
+    notifyListeners();
   }
 
   void create({
@@ -43,7 +41,7 @@ class TodoModel extends ChangeNotifier {
         createdAt: DateTime.now(),
       )
     ];
-    notifyListeners();
+    _saveAndNotify();
   }
 
   Iterable<Todo> get({required TodoFilters filter}) => switch (filter) {
@@ -57,7 +55,7 @@ class TodoModel extends ChangeNotifier {
     todoList = todoList
         .where((e) => !e.createdAt.isAtSameMomentAs(todo.createdAt))
         .toList();
-    notifyListeners();
+    _saveAndNotify();
   }
 
   void setTitle({
@@ -69,7 +67,7 @@ class TodoModel extends ChangeNotifier {
       todoList[targetTodoIndex] =
           todoList[targetTodoIndex].copyWith(title: title);
     }
-    notifyListeners();
+    _saveAndNotify();
   }
 
   void setDescription({
@@ -81,7 +79,7 @@ class TodoModel extends ChangeNotifier {
       todoList[targetTodoIndex] =
           todoList[targetTodoIndex].copyWith(description: description);
     }
-    notifyListeners();
+    _saveAndNotify();
   }
 
   void setFavorite({required Todo todo, required bool isFavorite}) {
@@ -90,7 +88,7 @@ class TodoModel extends ChangeNotifier {
       todoList[targetTodoIndex] =
           todoList[targetTodoIndex].copyWith(isFavorite: isFavorite);
     }
-    notifyListeners();
+    _saveAndNotify();
   }
 
   void setComplete({required Todo todo, required bool isCompleted}) {
@@ -99,6 +97,6 @@ class TodoModel extends ChangeNotifier {
       todoList[targetTodoIndex] =
           todoList[targetTodoIndex].copyWith(isCompleted: isCompleted);
     }
-    notifyListeners();
+    _saveAndNotify();
   }
 }
