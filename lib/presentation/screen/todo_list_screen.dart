@@ -24,7 +24,7 @@ class TodoListScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        color: const Color.fromRGBO(248, 251, 255, 1),
+        color: ColorPalette.backgroundList.color,
         child: CustomScrollView(
           slivers: [
             const TodoListSliverTitle(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/presentation/component/inherited/app_config_inherited_notifier.dart';
 
 class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -40,7 +41,7 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
                     color: appConfigModel.isHiddenFinish
-                        ? const Color.fromRGBO(255, 52, 52, 1)
+                        ? ColorPalette.primary.color
                         : Colors.black,
                   ),
                   child: Center(

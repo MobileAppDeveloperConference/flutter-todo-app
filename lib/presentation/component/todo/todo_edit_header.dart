@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
@@ -43,8 +44,8 @@ class _TodoEditHeaderState extends State<TodoEditHeader> {
             child: Center(
               child: Text(
                 '${editingTodo.createdAt.toMonthString} ${editingTodo.createdAt.toDayString} ${editingTodo.createdAt.toWeekdayString}',
-                style: const TextStyle(
-                  color: Color.fromRGBO(81, 130, 255, 1),
+                style: TextStyle(
+                  color: ColorPalette.secondary.color,
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
                 ),
@@ -61,12 +62,12 @@ class _TodoEditHeaderState extends State<TodoEditHeader> {
               );
               Navigator.of(context).pop();
             },
-            child: const Text(
+            child: Text(
               '안할래',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Color.fromRGBO(153, 153, 153, 1),
+                color: ColorPalette.rgb153.color,
               ),
             ),
           )

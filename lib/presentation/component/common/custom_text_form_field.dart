@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final int maxLength;
@@ -59,7 +60,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: textEditingController,
       maxLength: widget.maxLength,
       maxLines: widget.maxLines,
-      cursorColor: const Color.fromRGBO(255, 52, 52, 1),
+      cursorColor: ColorPalette.primary.color,
       cursorHeight: 16,
       cursorWidth: 1,
       decoration: InputDecoration(
@@ -79,17 +80,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         counterText: '',
         contentPadding: const EdgeInsets.all(16),
         filled: true,
-        hintStyle: const TextStyle(
+        hintStyle: TextStyle(
           fontWeight: FontWeight.w400,
           fontSize: 16,
-          color: Color.fromRGBO(171, 171, 171, 1),
+          color: ColorPalette.rgb153.color,
         ),
         labelStyle: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
           color: Colors.black,
         ),
-        fillColor: const Color.fromRGBO(246, 246, 246, 1),
+        fillColor: ColorPalette.rgb246.color,
         suffixIconConstraints: isDisplaySuffix
             ? const BoxConstraints(
                 minHeight: 24,
@@ -122,7 +123,7 @@ class _TextFormFieldSuffix extends StatelessWidget {
           width: 24,
           height: 24,
           decoration: BoxDecoration(
-            color: const Color.fromRGBO(153, 153, 153, 1),
+            color: ColorPalette.rgb153.color,
             borderRadius: BorderRadius.circular(24),
           ),
           child: Image.asset(

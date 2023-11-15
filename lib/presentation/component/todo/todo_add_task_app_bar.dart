@@ -59,11 +59,11 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               ),
               InkWell(
                 onTap: () => Navigator.of(context).pop(),
-                child: const Text(
+                child: Text(
                   '취소',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Color.fromRGBO(153, 153, 153, 1),
+                    color: ColorPalette.rgb153.color,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -78,8 +78,8 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
                   style: TextStyle(
                     fontSize: 16,
                     color: widget.canAdd
-                        ? const Color.fromRGBO(255, 52, 52, 1)
-                        : const Color.fromRGBO(153, 153, 153, 1),
+                        ? ColorPalette.primary.color
+                        : ColorPalette.rgb153.color,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

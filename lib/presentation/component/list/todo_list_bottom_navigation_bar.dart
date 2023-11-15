@@ -10,10 +10,10 @@ class TodoListBottomNavigationBar extends StatelessWidget {
     final appConfigModel = AppConfigModelInheritedNotifier.watch(context);
     final isImportant = appConfigModel.isImportant;
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Color.fromRGBO(235, 235, 235, 1),
+            color: ColorPalette.rgb235.color,
             width: 1.0,
           ),
         ),
@@ -45,7 +45,7 @@ class TodoListBottomNavigationBar extends StatelessWidget {
         selectedFontSize: 12,
         unselectedFontSize: 12,
         selectedItemColor: Colors.black,
-        unselectedItemColor: const Color.fromRGBO(171, 171, 171, 1),
+        unselectedItemColor: ColorPalette.rgb153.color,
       ),
     );
   }

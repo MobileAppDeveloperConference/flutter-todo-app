@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
@@ -47,7 +48,7 @@ class TodoItem extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: todo.completeState.isCompleted
-                      ? const Color.fromRGBO(204, 204, 204, 1)
+                      ? ColorPalette.rgb204.color
                       : Colors.black,
                 ),
               ),

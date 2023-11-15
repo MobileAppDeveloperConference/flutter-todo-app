@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
 
 class TodoListSliverEmpty extends StatelessWidget {
   const TodoListSliverEmpty({super.key});
@@ -9,7 +10,7 @@ class TodoListSliverEmpty extends StatelessWidget {
       child: Container(
         height: 128,
         width: double.infinity,
-        color: const Color.fromRGBO(226, 239, 255, 0.3),
+        color: ColorPalette.backgroundEmpty.color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -18,10 +19,10 @@ class TodoListSliverEmpty extends StatelessWidget {
               scale: 2,
             ),
             const SizedBox(height: 21),
-            const Text(
+            Text(
               '투두를 추가해보세요.',
               style: TextStyle(
-                color: Color.fromRGBO(201, 219, 240, 1),
+                color: ColorPalette.textEmpty.color,
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
               ),
