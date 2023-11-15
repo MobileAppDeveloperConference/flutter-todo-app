@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/data/app_config.dart';
 import 'package:flutter_todo_app/data/app_config_repository.dart';
 
@@ -10,9 +9,11 @@ class AppConfigModel extends ChangeNotifier {
 
   bool get isHiddenFinish => appConfig.isHiddenFinish;
   bool get isShowFinish => !isHiddenFinish;
-  bool get isImportants => appConfig.todoNavigation.isImportants;
-  int get todoNavigationIndex =>
-      TodoNavigations.values.indexOf(appConfig.todoNavigation);
+  bool get isImportant => appConfig.isImportant;
+  ImportantState get importantFilter => appConfig.importantState;
+  int get todoNavigationIndex => ImportantState.values.indexOf(
+        appConfig.importantState,
+      );
 
   AppConfigModel({required this.repository}) : appConfig = repository.load();
 
@@ -28,9 +29,9 @@ class AppConfigModel extends ChangeNotifier {
     _saveAndNotify();
   }
 
-  void setTodoNavigation(TodoNavigations todoNavigation) {
+  void setImportantFilter(ImportantState importantFilter) {
     appConfig = appConfig.copyWith(
-      todoNavigation: todoNavigation,
+      importantState: importantFilter,
     );
     _saveAndNotify();
   }

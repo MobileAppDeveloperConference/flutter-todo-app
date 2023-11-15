@@ -24,7 +24,7 @@ class AppConfigRepositoryImpl implements AppConfigRepository {
       return AppConfig.fromJson(jsonDecode(appConfigString));
     } else {
       return AppConfig(
-        todoNavigation: TodoNavigations.all,
+        importantState: ImportantState.not,
         isHiddenFinish: false,
       );
     }

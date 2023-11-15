@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
 import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
@@ -29,11 +30,12 @@ class TodoItem extends StatelessWidget {
           children: [
             const SizedBox(width: 16),
             TodoToggle(
-              isCompleted: todo.isCompleted,
+              completeState: todo.completeState,
               onTap: () {
-                TodoModelInheritedNotifier.read(context).setComplete(
-                  todo: todo,
-                  isCompleted: !todo.isCompleted,
+                TodoModelInheritedNotifier.read(context).update(
+                  todo: todo.copyWith(
+                    completeState: todo.completeState.nextState,
+                  ),
                 );
               },
             ),
@@ -44,7 +46,7 @@ class TodoItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: todo.isCompleted
+                  color: todo.completeState.isCompleted
                       ? const Color.fromRGBO(204, 204, 204, 1)
                       : Colors.black,
                 ),
@@ -54,9 +56,10 @@ class TodoItem extends StatelessWidget {
               const SizedBox(width: 16),
               InkWell(
                 onTap: () {
-                  TodoModelInheritedNotifier.read(context).setImportant(
-                    todo: todo,
-                    isImportant: !todo.isImportant,
+                  TodoModelInheritedNotifier.read(context).update(
+                    todo: todo.copyWith(
+                      importantState: todo.importantState.nextState,
+                    ),
                   );
                 },
                 child: Image.asset(

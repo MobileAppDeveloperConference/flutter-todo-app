@@ -33,8 +33,8 @@ class TodoListScreen extends StatelessWidget {
             if (isNotExistTodo) const TodoListSliverEmpty(),
             if (!isNotExistTodo)
               TodoListSliverList(
-                filter: TodoFilters.notCompleted,
-                isShowOnlyImportant: appConfig.isImportants,
+                completeState: CompleteState.not,
+                importantState: appConfig.importantFilter,
               ),
             if (isShowFinishedTodo)
               const TodoListSliverTitle(
@@ -42,8 +42,8 @@ class TodoListScreen extends StatelessWidget {
               ),
             if (isShowFinishedTodo)
               TodoListSliverList(
-                filter: TodoFilters.completed,
-                isShowOnlyImportant: appConfig.isImportants,
+                completeState: CompleteState.completed,
+                importantState: appConfig.importantFilter,
               ),
           ],
         ),

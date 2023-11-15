@@ -10,14 +10,20 @@ class AppConfigModelInheritedNotifier
   });
 
   static AppConfigModel watch(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<AppConfigModelInheritedNotifier>()!
-        .notifier!;
+    final appConfigModel = context
+        .dependOnInheritedWidgetOfExactType<AppConfigModelInheritedNotifier>()
+        ?.notifier;
+    assert(appConfigModel != null,
+        'Cannot find AppConfigModelInheritedNotifier in context.');
+    return appConfigModel!;
   }
 
   static AppConfigModel read(BuildContext context) {
-    return context
-        .findAncestorWidgetOfExactType<AppConfigModelInheritedNotifier>()!
-        .notifier!;
+    final appConfigModel = context
+        .findAncestorWidgetOfExactType<AppConfigModelInheritedNotifier>()
+        ?.notifier;
+    assert(appConfigModel != null,
+        'Cannot find AppConfigModelInheritedNotifier in context.');
+    return appConfigModel!;
   }
 }

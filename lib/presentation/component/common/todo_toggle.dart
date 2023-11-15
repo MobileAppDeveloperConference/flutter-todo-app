@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
 
 class TodoToggle extends StatelessWidget {
-  final bool isCompleted;
+  final CompleteState completeState;
   final VoidCallback onTap;
   const TodoToggle({
     super.key,
-    required this.isCompleted,
+    required this.completeState,
     required this.onTap,
   });
 
@@ -14,7 +16,7 @@ class TodoToggle extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Image.asset(
-        isCompleted
+        completeState.isCompleted
             ? 'assets/images/icon_checked_2x.png'
             : 'assets/images/icon_not_checked_2x.png',
         scale: 2,

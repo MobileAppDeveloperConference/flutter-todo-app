@@ -9,14 +9,20 @@ class TodoModelInheritedNotifier extends InheritedNotifier<TodoModel> {
   });
 
   static TodoModel watch(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<TodoModelInheritedNotifier>()!
-        .notifier!;
+    final todoModel = context
+        .dependOnInheritedWidgetOfExactType<TodoModelInheritedNotifier>()
+        ?.notifier;
+    assert(todoModel != null,
+        'Cannot find TodoModelInheritedNotifier in context.');
+    return todoModel!;
   }
 
   static TodoModel read(BuildContext context) {
-    return context
-        .findAncestorWidgetOfExactType<TodoModelInheritedNotifier>()!
-        .notifier!;
+    final todoModel = context
+        .findAncestorWidgetOfExactType<TodoModelInheritedNotifier>()
+        ?.notifier;
+    assert(todoModel != null,
+        'Cannot find TodoModelInheritedNotifier in context.');
+    return todoModel!;
   }
 }

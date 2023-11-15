@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/data/todo_repository.dart';
 
@@ -12,32 +13,21 @@ class TodoModel extends ChangeNotifier {
   bool get isEmpty => todoList.isEmpty;
   bool get isNotEmpty => !isEmpty;
 
-  bool get isExistCompleted => todoList.any((element) => element.isCompleted);
+  bool get isExistCompleted => todoList.any((e) => e.completeState.isCompleted);
   bool get isNotExistCompleted => isExistCompleted;
 
-  int _getTodoIndex({required DateTime createdAt}) {
-    return todoList.indexWhere(
-      (e) => e.createdAt.isAtSameMomentAs(createdAt),
-    );
-  }
-
-  void _saveAndNotify() {
-    repository.save(todoList: todoList);
-    notifyListeners();
-  }
-
   //----------------------------------------------------------------------------
-  // Todo 생성
+  // create method
   void create({
     required String title,
-    required bool isImportant,
+    required ImportantState importantState,
     String? description,
   }) {
     todoList = [
       ...todoList,
       Todo(
-        isCompleted: false,
-        isImportant: isImportant,
+        completeState: CompleteState.not,
+        importantState: importantState,
         title: title,
         description: description ?? '',
         createdAt: DateTime.now(),
@@ -47,14 +37,32 @@ class TodoModel extends ChangeNotifier {
   }
 
   //----------------------------------------------------------------------------
-  // Todo 읽기
-  Iterable<Todo> get({required TodoFilters filter}) => switch (filter) {
-        TodoFilters.notCompleted => todoList.where((e) => e.isNotCompleted),
-        TodoFilters.completed => todoList.where((e) => e.isCompleted),
-      };
+  // read method
+  Iterable<Todo> get({
+    required CompleteState completeState,
+    required ImportantState importantState,
+  }) =>
+      todoList.where(
+        (e) => e.isEqualStates(
+          completeState: completeState,
+          importantState: importantState,
+        ),
+      );
 
   //----------------------------------------------------------------------------
-  // Todo 삭제
+  // update method
+  void update({required Todo todo}) {
+    final targetIndex = todoList.indexWhere(
+      (e) => e.createdAt.isAtSameMomentAs(todo.createdAt),
+    );
+    if (targetIndex != -1) {
+      todoList[targetIndex] = todo;
+    }
+    _saveAndNotify();
+  }
+
+  //----------------------------------------------------------------------------
+  // delete method
   void delete({
     required Todo todo,
   }) {
@@ -64,46 +72,10 @@ class TodoModel extends ChangeNotifier {
     _saveAndNotify();
   }
 
-  // Todo 업데이트
-  void setTitle({
-    required Todo todo,
-    required String title,
-  }) {
-    final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
-    if (targetTodoIndex != -1) {
-      todoList[targetTodoIndex] =
-          todoList[targetTodoIndex].copyWith(title: title);
-    }
-    _saveAndNotify();
-  }
-
-  void setDescription({
-    required Todo todo,
-    required String description,
-  }) {
-    final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
-    if (targetTodoIndex != -1) {
-      todoList[targetTodoIndex] =
-          todoList[targetTodoIndex].copyWith(description: description);
-    }
-    _saveAndNotify();
-  }
-
-  void setImportant({required Todo todo, required bool isImportant}) {
-    final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
-    if (targetTodoIndex != -1) {
-      todoList[targetTodoIndex] =
-          todoList[targetTodoIndex].copyWith(isImportant: isImportant);
-    }
-    _saveAndNotify();
-  }
-
-  void setComplete({required Todo todo, required bool isCompleted}) {
-    final targetTodoIndex = _getTodoIndex(createdAt: todo.createdAt);
-    if (targetTodoIndex != -1) {
-      todoList[targetTodoIndex] =
-          todoList[targetTodoIndex].copyWith(isCompleted: isCompleted);
-    }
-    _saveAndNotify();
+  //----------------------------------------------------------------------------
+  // private method
+  void _saveAndNotify() {
+    repository.save(todoList: todoList);
+    notifyListeners();
   }
 }

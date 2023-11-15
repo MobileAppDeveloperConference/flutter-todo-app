@@ -1,31 +1,34 @@
 import 'package:flutter_todo_app/common/enums.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
 
 class AppConfig {
-  final TodoNavigations todoNavigation;
+  final ImportantState importantState;
   final bool isHiddenFinish;
 
+  bool get isImportant => importantState.isImportant;
+
   AppConfig({
-    required this.todoNavigation,
+    required this.importantState,
     required this.isHiddenFinish,
   });
 
   AppConfig copyWith({
-    TodoNavigations? todoNavigation,
+    ImportantState? importantState,
     bool? isHiddenFinish,
   }) {
     return AppConfig(
-      todoNavigation: todoNavigation ?? this.todoNavigation,
+      importantState: importantState ?? this.importantState,
       isHiddenFinish: isHiddenFinish ?? this.isHiddenFinish,
     );
   }
 
   factory AppConfig.fromJson(Map<String, dynamic> json) => AppConfig(
-        todoNavigation: TodoNavigations.values[json['todoNavigation'] as int],
+        importantState: ImportantState.values[json['importantState'] as int],
         isHiddenFinish: json['isHiddenFinish'] as bool,
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'todoNavigation': todoNavigation.index,
+        'importantState': importantState.index,
         'isHiddenFinish': isHiddenFinish,
       };
 }

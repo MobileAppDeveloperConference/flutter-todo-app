@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star_toggle.dart';
 
 class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool canAdd;
-  final bool isImportant;
-  final Function(bool isImportant) onFinished;
+  final ImportantState initialImportantState;
+  final Function(ImportantState importantState) onFinished;
   const TodoAddTaskAppBar({
     super.key,
     required this.canAdd,
-    required this.isImportant,
+    required this.initialImportantState,
     required this.onFinished,
   });
 
@@ -20,7 +22,7 @@ class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
-  bool? isImportant;
+  ImportantState? importantState;
 
   @override
   void initState() {
@@ -29,7 +31,7 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    isImportant ??= widget.isImportant;
+    importantState ??= widget.initialImportantState;
     return Container(
       color: Colors.white,
       child: Align(
@@ -45,10 +47,10 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               ),
               const SizedBox(width: 8),
               TodoAppBarStarToggle(
-                isImportant: isImportant!,
+                importantState: importantState!,
                 onTap: () {
                   setState(() {
-                    isImportant = !isImportant!;
+                    importantState = importantState!.nextState;
                   });
                 },
               ),
@@ -69,7 +71,7 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               const SizedBox(width: 26),
               InkWell(
                 onTap: widget.canAdd
-                    ? () => widget.onFinished(isImportant!)
+                    ? () => widget.onFinished(importantState!)
                     : null,
                 child: Text(
                   '완료',

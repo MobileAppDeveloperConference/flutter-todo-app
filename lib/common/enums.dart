@@ -1,9 +1,9 @@
-enum TodoNavigations {
-  all,
-  importants,
+enum CompleteState {
+  not,
+  completed,
 }
 
-enum TodoFilters {
-  notCompleted,
-  completed,
+enum ImportantState {
+  not,
+  important,
 }

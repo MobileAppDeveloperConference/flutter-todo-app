@@ -22,7 +22,7 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               const SizedBox(width: 16),
               Image.asset(
-                appConfigModel.isImportants
+                appConfigModel.isImportant
                     ? 'assets/images/icon_title_star_2x.png'
                     : 'assets/images/icon_title_todo_2x.png',
                 scale: 2,

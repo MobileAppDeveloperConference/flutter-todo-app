@@ -8,6 +8,7 @@ class TodoListBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appConfigModel = AppConfigModelInheritedNotifier.watch(context);
+    final isImportant = appConfigModel.isImportant;
     return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -21,14 +22,14 @@ class TodoListBottomNavigationBar extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_home_${appConfigModel.isImportants ? 'off' : 'on'}_2x.png',
+              'assets/images/icon_tap_home_${isImportant ? 'off' : 'on'}_2x.png',
               scale: 2,
             ),
             label: '기본',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_star_${appConfigModel.isImportants ? 'on' : 'off'}_2x.png',
+              'assets/images/icon_tap_star_${isImportant ? 'on' : 'off'}_2x.png',
               scale: 2,
             ),
             label: '중요',
@@ -36,8 +37,8 @@ class TodoListBottomNavigationBar extends StatelessWidget {
         ],
         currentIndex: appConfigModel.todoNavigationIndex,
         onTap: (index) {
-          appConfigModel.setTodoNavigation(
-            TodoNavigations.values.elementAt(index),
+          appConfigModel.setImportantFilter(
+            ImportantState.values.elementAt(index),
           );
         },
         elevation: 0,

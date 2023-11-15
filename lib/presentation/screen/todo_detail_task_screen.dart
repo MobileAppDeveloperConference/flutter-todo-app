@@ -16,14 +16,15 @@ class TodoDetailTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TodoEditTaskAppBar(
-        initialImportant: initialTodo.isImportant,
+        initialImportantState: initialTodo.importantState,
         onClose: () {
           Navigator.of(context).pop();
         },
-        onChangedImportant: (isImportant) {
-          TodoModelInheritedNotifier.read(context).setImportant(
-            todo: initialTodo,
-            isImportant: isImportant,
+        onChangedImportant: (importantState) {
+          TodoModelInheritedNotifier.read(context).update(
+            todo: initialTodo.copyWith(
+              importantState: importantState,
+            ),
           );
         },
       ),
@@ -41,9 +42,10 @@ class TodoDetailTaskScreen extends StatelessWidget {
                 hintText: '투두를 입력해주세요.',
                 usingSuffix: true,
                 onChangedText: (text) {
-                  TodoModelInheritedNotifier.read(context).setTitle(
-                    todo: initialTodo,
-                    title: text,
+                  TodoModelInheritedNotifier.read(context).update(
+                    todo: initialTodo.copyWith(
+                      title: text,
+                    ),
                   );
                 },
               ),
@@ -55,9 +57,10 @@ class TodoDetailTaskScreen extends StatelessWidget {
                 hintText: '원한다면 투두에 설명도 추가할 수 있어요.',
                 usingSuffix: false,
                 onChangedText: (text) {
-                  TodoModelInheritedNotifier.read(context).setDescription(
-                    todo: initialTodo,
-                    description: text,
+                  TodoModelInheritedNotifier.read(context).update(
+                    todo: initialTodo.copyWith(
+                      description: text,
+                    ),
                   );
                 },
               ),

@@ -15,7 +15,18 @@ extension KoreanDateTimeExtension on DateTime {
   String get toDayString => '$day월';
 }
 
-extension TodoNavigationExtension on TodoNavigations {
-  bool get isAll => this == TodoNavigations.all;
-  bool get isImportants => this == TodoNavigations.importants;
+extension ImportantStateExtension on ImportantState {
+  bool get isImportant => this == ImportantState.important;
+  bool get isNotImportant => this == ImportantState.not;
+
+  ImportantState get nextState =>
+      isNotImportant ? ImportantState.important : ImportantState.not;
+}
+
+extension CompleteStateExtension on CompleteState {
+  bool get isCompleted => this == CompleteState.completed;
+  bool get isNotCompleted => this == CompleteState.not;
+
+  CompleteState get nextState =>
+      isNotCompleted ? CompleteState.completed : CompleteState.not;
 }

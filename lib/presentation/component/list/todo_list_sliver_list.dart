@@ -4,22 +4,20 @@ import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inh
 import 'package:flutter_todo_app/presentation/component/list/todo_item.dart';
 
 class TodoListSliverList extends StatelessWidget {
-  final TodoFilters filter;
-  final bool isShowOnlyImportant;
+  final CompleteState completeState;
+  final ImportantState importantState;
   const TodoListSliverList({
     super.key,
-    required this.filter,
-    required this.isShowOnlyImportant,
+    required this.completeState,
+    required this.importantState,
   });
 
   @override
   Widget build(BuildContext context) {
     var todoList = TodoModelInheritedNotifier.watch(context).get(
-      filter: filter,
+      completeState: completeState,
+      importantState: importantState,
     );
-    if (isShowOnlyImportant) {
-      todoList = todoList.where((element) => element.isImportant).toList();
-    }
     return SliverList.builder(
       itemCount: todoList.length,
       itemBuilder: (context, index) => TodoItem(

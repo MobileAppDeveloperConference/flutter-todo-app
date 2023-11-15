@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_app/common/enums.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
 
 class TodoAppBarStarToggle extends StatelessWidget {
-  final bool isImportant;
+  final ImportantState importantState;
   final VoidCallback onTap;
   const TodoAppBarStarToggle({
     super.key,
-    required this.isImportant,
+    required this.importantState,
     required this.onTap,
   });
 
@@ -14,7 +16,7 @@ class TodoAppBarStarToggle extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Image.asset(
-        isImportant
+        importantState.isImportant
             ? 'assets/images/icon_star_on_2x.png'
             : 'assets/images/icon_star_off_2x.png',
         scale: 2,
