@@ -26,7 +26,7 @@ class TodoItem extends StatelessWidget with TodoDeleteDialogCreator {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(todo.createdAt.hashCode),
-      groupTag: '0',
+      groupTag: 'todo_group',
       closeOnScroll: true,
       endActionPane: ActionPane(
         extentRatio: 0.3,
