@@ -20,23 +20,23 @@ class TodoModel extends ChangeNotifier {
         config = configRepository.load();
 
   bool get isEmpty => todoList.isEmpty;
-  bool get isExistCompleted => todoList.any((e) => e.completeState.isCompleted);
+  bool get isExistCompleted => todoList.any((e) => e.completed.isCompleted);
   bool get isHiddenFinish => config.isHiddenFinish;
-  ImportantState get importantState => config.importantState;
+  Important get important => config.important;
 
   //----------------------------------------------------------------------------
   // Todo
   // create method
   void create({
     required String title,
-    required ImportantState importantState,
+    required Important important,
     String? description,
   }) {
     todoList = [
       ...todoList,
       Todo(
-        completeState: CompleteState.not,
-        importantState: importantState,
+        completed: Completed.not,
+        important: important,
         title: title,
         description: description ?? '',
         createdAt: DateTime.now(),
@@ -47,13 +47,13 @@ class TodoModel extends ChangeNotifier {
 
   // read method
   Iterable<Todo> get({
-    required CompleteState completeState,
-    required ImportantState importantState,
+    required Completed completed,
+    required Important important,
   }) =>
       todoList.where(
         (e) => e.isInCondition(
-          completeState: completeState,
-          importantState: importantState.isImportant ? importantState : null,
+          completed: completed,
+          important: important.isImportant ? important : null,
         ),
       );
 
@@ -91,9 +91,9 @@ class TodoModel extends ChangeNotifier {
     _saveConfig();
   }
 
-  void updateImportantFilter(ImportantState importantFilter) {
+  void updateImportant(Important important) {
     config = config.copyWith(
-      importantState: importantFilter,
+      important: important,
     );
     _saveConfig();
   }

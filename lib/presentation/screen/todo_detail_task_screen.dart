@@ -16,14 +16,14 @@ class TodoDetailTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TodoEditTaskAppBar(
-        initialImportantState: initialTodo.importantState,
+        initialImportant: initialTodo.important,
         onClose: () {
           Navigator.of(context).pop();
         },
-        onChangedImportant: (importantState) {
+        onChangedImportant: (important) {
           TodoModelInheritedNotifier.read(context).update(
             todo: initialTodo.copyWith(
-              importantState: importantState,
+              important: important,
             ),
           );
         },

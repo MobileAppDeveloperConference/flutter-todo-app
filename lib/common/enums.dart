@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-enum CompleteState {
+enum Completed {
   not,
   completed,
 }
 
-enum ImportantState {
+enum Important {
   not,
   important,
 }

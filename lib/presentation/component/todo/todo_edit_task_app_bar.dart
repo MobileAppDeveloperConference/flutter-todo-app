@@ -4,12 +4,12 @@ import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star_toggle.dart';
 
 class TodoEditTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final ImportantState initialImportantState;
+  final Important initialImportant;
   final VoidCallback onClose;
-  final Function(ImportantState importantState) onChangedImportant;
+  final Function(Important important) onChangedImportant;
   const TodoEditTaskAppBar({
     super.key,
-    required this.initialImportantState,
+    required this.initialImportant,
     required this.onClose,
     required this.onChangedImportant,
   });
@@ -22,7 +22,7 @@ class TodoEditTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TodoEditTaskAppBarState extends State<TodoEditTaskAppBar> {
-  ImportantState? importantState;
+  Important? important;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _TodoEditTaskAppBarState extends State<TodoEditTaskAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    importantState ??= widget.initialImportantState;
+    important ??= widget.initialImportant;
     return Container(
       color: Colors.white,
       child: Align(
@@ -47,11 +47,11 @@ class _TodoEditTaskAppBarState extends State<TodoEditTaskAppBar> {
               ),
               const SizedBox(width: 8),
               TodoAppBarStarToggle(
-                importantState: importantState!,
+                important: important!,
                 onTap: () {
                   setState(() {
-                    importantState = importantState!.nextState;
-                    widget.onChangedImportant(importantState!);
+                    important = important!.nextState;
+                    widget.onChangedImportant(important!);
                   });
                 },
               ),

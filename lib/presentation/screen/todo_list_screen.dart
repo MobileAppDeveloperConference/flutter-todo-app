@@ -16,7 +16,7 @@ class TodoListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todoModel = TodoModelInheritedNotifier.watch(context);
-    final importantState = todoModel.importantState;
+    final important = todoModel.important;
     final bool isNotExistTodo = todoModel.isEmpty;
     final bool isShowFinishedTodo =
         todoModel.isHiddenFinish == false && todoModel.isExistCompleted;
@@ -32,16 +32,16 @@ class TodoListScreen extends StatelessWidget {
               if (isNotExistTodo) const TodoListSliverEmpty(),
               if (!isNotExistTodo)
                 TodoListSliverList(
-                  completeState: CompleteState.not,
-                  importantState: importantState,
+                  completed: Completed.not,
+                  important: important,
                 ),
               if (isShowFinishedTodo) ...[
                 const TodoListSliverTitle(
                   title: '완료',
                 ),
                 TodoListSliverList(
-                  completeState: CompleteState.completed,
-                  importantState: importantState,
+                  completed: Completed.completed,
+                  important: important,
                 ),
               ],
             ],

@@ -9,7 +9,7 @@ class TodoListBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todoModel = TodoModelInheritedNotifier.watch(context);
-    final importantState = todoModel.importantState;
+    final important = todoModel.important;
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -23,25 +23,25 @@ class TodoListBottomNavigationBar extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_home_${importantState.isImportant ? 'off' : 'on'}_2x.png',
+              'assets/images/icon_tap_home_${important.isImportant ? 'off' : 'on'}_2x.png',
               scale: 2,
             ),
             label: '기본',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_star_${importantState.isImportant ? 'on' : 'off'}_2x.png',
+              'assets/images/icon_tap_star_${important.isImportant ? 'on' : 'off'}_2x.png',
               scale: 2,
             ),
             label: '중요',
           ),
         ],
-        currentIndex: ImportantState.values.indexOf(
-          todoModel.importantState,
+        currentIndex: Important.values.indexOf(
+          todoModel.important,
         ),
         onTap: (index) {
-          todoModel.updateImportantFilter(
-            ImportantState.values.elementAt(index),
+          todoModel.updateImportant(
+            Important.values.elementAt(index),
           );
         },
         elevation: 0,

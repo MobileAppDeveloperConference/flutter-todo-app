@@ -15,18 +15,18 @@ extension KoreanDateTimeExtension on DateTime {
   String get toDayString => '$day월';
 }
 
-extension ImportantStateExtension on ImportantState {
-  bool get isImportant => this == ImportantState.important;
-  bool get isNotImportant => this == ImportantState.not;
+extension ImportantExtension on Important {
+  bool get isImportant => this == Important.important;
+  bool get isNotImportant => this == Important.not;
 
-  ImportantState get nextState =>
-      isNotImportant ? ImportantState.important : ImportantState.not;
+  Important get nextState =>
+      isNotImportant ? Important.important : Important.not;
 }
 
-extension CompleteStateExtension on CompleteState {
-  bool get isCompleted => this == CompleteState.completed;
-  bool get isNotCompleted => this == CompleteState.not;
+extension CompletedExtension on Completed {
+  bool get isCompleted => this == Completed.completed;
+  bool get isNotCompleted => this == Completed.not;
 
-  CompleteState get nextState =>
-      isNotCompleted ? CompleteState.completed : CompleteState.not;
+  Completed get nextState =>
+      isNotCompleted ? Completed.completed : Completed.not;
 }
