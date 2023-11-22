@@ -3,7 +3,7 @@ import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_notifier.dart';
 
 class TodoEditHeader extends StatefulWidget {
   final Todo initialTodo;
