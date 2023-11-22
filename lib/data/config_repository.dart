@@ -1,29 +1,29 @@
 import 'dart:convert';
 
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/data/app_config.dart';
+import 'package:flutter_todo_app/data/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class AppConfigRepository {
-  AppConfig load();
-  void save({required AppConfig appConfig});
+abstract class ConfigRepository {
+  Config load();
+  void save({required Config appConfig});
 }
 
-class AppConfigRepositoryImpl implements AppConfigRepository {
-  static const String key = 'appConfigKey';
+class ConfigRepositoryImpl implements ConfigRepository {
+  static const String key = 'configKey';
   final SharedPreferences sharedPreferences;
 
-  AppConfigRepositoryImpl({
+  ConfigRepositoryImpl({
     required this.sharedPreferences,
   });
 
   @override
-  AppConfig load() {
+  Config load() {
     final appConfigString = sharedPreferences.getString(key);
     if (appConfigString != null) {
-      return AppConfig.fromJson(jsonDecode(appConfigString));
+      return Config.fromJson(jsonDecode(appConfigString));
     } else {
-      return AppConfig(
+      return Config(
         importantState: ImportantState.not,
         isHiddenFinish: false,
       );
@@ -31,7 +31,7 @@ class AppConfigRepositoryImpl implements AppConfigRepository {
   }
 
   @override
-  void save({required AppConfig appConfig}) {
+  void save({required Config appConfig}) {
     sharedPreferences.setString(
       key,
       jsonEncode(appConfig.toJson()),

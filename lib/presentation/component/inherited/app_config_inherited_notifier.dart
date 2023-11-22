@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/domain/app_config_model.dart';
+import 'package:flutter_todo_app/domain/config_model.dart';
 
-class AppConfigModelInheritedNotifier
-    extends InheritedNotifier<AppConfigModel> {
+class AppConfigModelInheritedNotifier extends InheritedNotifier<ConfigModel> {
   const AppConfigModelInheritedNotifier({
     super.key,
     required super.notifier,
     required super.child,
   });
 
-  static AppConfigModel watch(BuildContext context) {
+  static ConfigModel watch(BuildContext context) {
     final appConfigModel = context
         .dependOnInheritedWidgetOfExactType<AppConfigModelInheritedNotifier>()
         ?.notifier;
@@ -18,7 +17,7 @@ class AppConfigModelInheritedNotifier
     return appConfigModel!;
   }
 
-  static AppConfigModel read(BuildContext context) {
+  static ConfigModel read(BuildContext context) {
     final appConfigModel = context
         .findAncestorWidgetOfExactType<AppConfigModelInheritedNotifier>()
         ?.notifier;

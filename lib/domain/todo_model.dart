@@ -5,10 +5,11 @@ import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/data/todo_repository.dart';
 
 class TodoModel extends ChangeNotifier {
-  final TodoRepository repository;
+  final TodoRepository todoRepository;
+
   List<Todo> todoList;
 
-  TodoModel({required this.repository}) : todoList = repository.load();
+  TodoModel({required this.todoRepository}) : todoList = todoRepository.load();
 
   bool get isEmpty => todoList.isEmpty;
   bool get isNotEmpty => !isEmpty;
@@ -75,7 +76,7 @@ class TodoModel extends ChangeNotifier {
   //----------------------------------------------------------------------------
   // private method
   void _saveAndNotify() {
-    repository.save(todoList: todoList);
+    todoRepository.save(todoList: todoList);
     notifyListeners();
   }
 }

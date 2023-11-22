@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/data/app_config.dart';
-import 'package:flutter_todo_app/data/app_config_repository.dart';
+import 'package:flutter_todo_app/data/config.dart';
+import 'package:flutter_todo_app/data/config_repository.dart';
 
-class AppConfigModel extends ChangeNotifier {
-  final AppConfigRepository repository;
-  AppConfig appConfig;
+class ConfigModel extends ChangeNotifier {
+  final ConfigRepository repository;
+  Config appConfig;
 
   bool get isHiddenFinish => appConfig.isHiddenFinish;
   bool get isShowFinish => !isHiddenFinish;
@@ -15,7 +15,7 @@ class AppConfigModel extends ChangeNotifier {
         appConfig.importantState,
       );
 
-  AppConfigModel({required this.repository}) : appConfig = repository.load();
+  ConfigModel({required this.repository}) : appConfig = repository.load();
 
   void _saveAndNotify() {
     repository.save(appConfig: appConfig);
