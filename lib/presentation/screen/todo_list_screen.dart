@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/presentation/component/inherited/app_config_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
@@ -25,27 +26,29 @@ class TodoListScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         color: ColorPalette.backgroundList.color,
-        child: CustomScrollView(
-          slivers: [
-            const TodoListSliverTitle(
-              title: '하는 중',
-            ),
-            if (isNotExistTodo) const TodoListSliverEmpty(),
-            if (!isNotExistTodo)
-              TodoListSliverList(
-                completeState: CompleteState.not,
-                importantState: appConfig.importantFilter,
-              ),
-            if (isShowFinishedTodo)
+        child: SlidableAutoCloseBehavior(
+          child: CustomScrollView(
+            slivers: [
               const TodoListSliverTitle(
-                title: '완료',
+                title: '하는 중',
               ),
-            if (isShowFinishedTodo)
-              TodoListSliverList(
-                completeState: CompleteState.completed,
-                importantState: appConfig.importantFilter,
-              ),
-          ],
+              if (isNotExistTodo) const TodoListSliverEmpty(),
+              if (!isNotExistTodo)
+                TodoListSliverList(
+                  completeState: CompleteState.not,
+                  importantState: appConfig.importantFilter,
+                ),
+              if (isShowFinishedTodo)
+                const TodoListSliverTitle(
+                  title: '완료',
+                ),
+              if (isShowFinishedTodo)
+                TodoListSliverList(
+                  completeState: CompleteState.completed,
+                  importantState: appConfig.importantFilter,
+                ),
+            ],
+          ),
         ),
       ),
       appBar: const TodoListAppBar(),
