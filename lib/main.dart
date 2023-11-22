@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/data/config_repository.dart';
 import 'package:flutter_todo_app/data/todo_repository.dart';
-import 'package:flutter_todo_app/domain/config_model.dart';
 import 'package:flutter_todo_app/domain/todo_model.dart';
 import 'package:flutter_todo_app/todo_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,9 +13,7 @@ void main() async {
         todoRepository: TodoRepositoryImpl(
           sharedPreferences: sharedPreferences,
         ),
-      ),
-      configModel: ConfigModel(
-        repository: ConfigRepositoryImpl(
+        configRepository: ConfigRepositoryImpl(
           sharedPreferences: sharedPreferences,
         ),
       ),

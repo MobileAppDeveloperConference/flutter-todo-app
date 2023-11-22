@@ -6,7 +6,7 @@ import 'package:flutter_todo_app/data/todo.dart';
 import 'package:flutter_todo_app/presentation/component/common/dialog/todo_delete_dialog_creator.dart';
 import 'package:flutter_todo_app/presentation/component/common/toast/custom_toast.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_toggle.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/screen/todo_detail_task_screen.dart';
 
 class TodoItem extends StatelessWidget with TodoDeleteDialogCreator {

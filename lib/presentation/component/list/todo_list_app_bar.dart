@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/app_config_inherited_notifier.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
+import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_notifier.dart';
 
 class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TodoListAppBar({
@@ -12,7 +13,9 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appConfigModel = AppConfigModelInheritedNotifier.watch(context);
+    final todoModel = TodoModelInheritedNotifier.watch(context);
+    final importantState = todoModel.importantState;
+    final isHiddenFinish = todoModel.isHiddenFinish;
     return Container(
       color: Colors.white,
       child: Align(
@@ -23,7 +26,7 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               const SizedBox(width: 16),
               Image.asset(
-                appConfigModel.isImportant
+                importantState.isImportant
                     ? 'assets/images/icon_title_star_2x.png'
                     : 'assets/images/icon_title_todo_2x.png',
                 scale: 2,
@@ -32,21 +35,19 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: SizedBox(),
               ),
               GestureDetector(
-                onTap: () {
-                  appConfigModel.toggleHideFinish();
-                },
+                onTap: () => todoModel.updateHiddenFinish(!isHiddenFinish),
                 child: Container(
                   width: 77,
                   height: 30,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
-                    color: appConfigModel.isHiddenFinish
+                    color: isHiddenFinish
                         ? ColorPalette.primary.color
                         : Colors.black,
                   ),
                   child: Center(
                     child: Text(
-                      appConfigModel.isHiddenFinish ? '완료 보기' : '완료 숨기기',
+                      isHiddenFinish ? '완료 보기' : '완료 숨기기',
                       style: const TextStyle(
                         fontSize: 13,
                         color: Colors.white,

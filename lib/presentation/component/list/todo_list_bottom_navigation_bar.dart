@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/app_config_inherited_notifier.dart';
+import 'package:flutter_todo_app/common/extensions.dart';
+import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_notifier.dart';
 
 class TodoListBottomNavigationBar extends StatelessWidget {
   const TodoListBottomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final appConfigModel = AppConfigModelInheritedNotifier.watch(context);
-    final isImportant = appConfigModel.isImportant;
+    final todoModel = TodoModelInheritedNotifier.watch(context);
+    final importantState = todoModel.importantState;
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -22,22 +23,24 @@ class TodoListBottomNavigationBar extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_home_${isImportant ? 'off' : 'on'}_2x.png',
+              'assets/images/icon_tap_home_${importantState.isImportant ? 'off' : 'on'}_2x.png',
               scale: 2,
             ),
             label: '기본',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/icon_tap_star_${isImportant ? 'on' : 'off'}_2x.png',
+              'assets/images/icon_tap_star_${importantState.isImportant ? 'on' : 'off'}_2x.png',
               scale: 2,
             ),
             label: '중요',
           ),
         ],
-        currentIndex: appConfigModel.todoNavigationIndex,
+        currentIndex: ImportantState.values.indexOf(
+          todoModel.importantState,
+        ),
         onTap: (index) {
-          appConfigModel.setImportantFilter(
+          todoModel.updateImportantFilter(
             ImportantState.values.elementAt(index),
           );
         },

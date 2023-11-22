@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_item.dart';
 
 class TodoListSliverList extends StatelessWidget {

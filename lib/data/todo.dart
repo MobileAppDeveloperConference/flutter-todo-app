@@ -19,12 +19,12 @@ class Todo {
   bool get isNotCompleted => completeState.isNotCompleted;
   bool get isImportant => importantState.isImportant;
 
-  bool isEqualStates({
+  bool isInCondition({
     required CompleteState completeState,
-    required ImportantState importantState,
+    ImportantState? importantState,
   }) {
     return this.completeState == completeState &&
-        this.importantState == importantState;
+        (importantState == null ? true : this.importantState == importantState);
   }
 
   Todo copyWith({

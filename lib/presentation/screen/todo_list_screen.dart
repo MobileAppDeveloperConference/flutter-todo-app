@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/app_config_inherited_notifier.dart';
-import 'package:flutter_todo_app/presentation/component/inherited/todo_model_inherited_notifier.dart';
+import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_notifier.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_sliver_empty.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_app_bar.dart';
 import 'package:flutter_todo_app/presentation/component/list/todo_list_bottom_navigation_bar.dart';
@@ -17,10 +16,10 @@ class TodoListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todoModel = TodoModelInheritedNotifier.watch(context);
-    final appConfig = AppConfigModelInheritedNotifier.watch(context);
+    final importantState = todoModel.importantState;
     final bool isNotExistTodo = todoModel.isEmpty;
     final bool isShowFinishedTodo =
-        appConfig.isHiddenFinish == false && todoModel.isExistCompleted;
+        todoModel.isHiddenFinish == false && todoModel.isExistCompleted;
 
     return Scaffold(
       body: Container(
@@ -29,24 +28,22 @@ class TodoListScreen extends StatelessWidget {
         child: SlidableAutoCloseBehavior(
           child: CustomScrollView(
             slivers: [
-              const TodoListSliverTitle(
-                title: '하는 중',
-              ),
+              const TodoListSliverTitle(title: '하는 중'),
               if (isNotExistTodo) const TodoListSliverEmpty(),
               if (!isNotExistTodo)
                 TodoListSliverList(
                   completeState: CompleteState.not,
-                  importantState: appConfig.importantFilter,
+                  importantState: importantState,
                 ),
-              if (isShowFinishedTodo)
+              if (isShowFinishedTodo) ...[
                 const TodoListSliverTitle(
                   title: '완료',
                 ),
-              if (isShowFinishedTodo)
                 TodoListSliverList(
                   completeState: CompleteState.completed,
-                  importantState: appConfig.importantFilter,
+                  importantState: importantState,
                 ),
+              ],
             ],
           ),
         ),

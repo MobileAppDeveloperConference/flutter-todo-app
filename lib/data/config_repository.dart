@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ConfigRepository {
   Config load();
-  void save({required Config appConfig});
+  void save({required Config config});
 }
 
 class ConfigRepositoryImpl implements ConfigRepository {
@@ -19,9 +19,9 @@ class ConfigRepositoryImpl implements ConfigRepository {
 
   @override
   Config load() {
-    final appConfigString = sharedPreferences.getString(key);
-    if (appConfigString != null) {
-      return Config.fromJson(jsonDecode(appConfigString));
+    final configString = sharedPreferences.getString(key);
+    if (configString != null) {
+      return Config.fromJson(jsonDecode(configString));
     } else {
       return Config(
         importantState: ImportantState.not,
@@ -31,10 +31,10 @@ class ConfigRepositoryImpl implements ConfigRepository {
   }
 
   @override
-  void save({required Config appConfig}) {
+  void save({required Config config}) {
     sharedPreferences.setString(
       key,
-      jsonEncode(appConfig.toJson()),
+      jsonEncode(config.toJson()),
     );
   }
 }
