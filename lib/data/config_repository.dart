@@ -24,7 +24,7 @@ class ConfigRepositoryImpl implements ConfigRepository {
       return Config.fromJson(jsonDecode(configString));
     } else {
       return Config(
-        importantState: ImportantState.not,
+        important: Important.not,
         isHiddenFinish: false,
       );
     }

@@ -14,7 +14,7 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final todoModel = TodoModelInheritedNotifier.watch(context);
-    final importantState = todoModel.importantState;
+    final important = todoModel.important;
     final isHiddenFinish = todoModel.isHiddenFinish;
     return Container(
       color: Colors.white,
@@ -26,7 +26,7 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               const SizedBox(width: 16),
               Image.asset(
-                importantState.isImportant
+                important.isImportant
                     ? 'assets/images/icon_title_star_2x.png'
                     : 'assets/images/icon_title_todo_2x.png',
                 scale: 2,

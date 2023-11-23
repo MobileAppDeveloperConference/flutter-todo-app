@@ -60,13 +60,13 @@ class TodoItem extends StatelessWidget with TodoDeleteDialogCreator {
             children: [
               const SizedBox(width: 16),
               TodoToggle(
-                completeState: todo.completeState,
+                completed: todo.completed,
                 onTap: () {
-                  final nextCompletState = todo.completeState.nextState;
+                  final nextCompletState = todo.completed.nextState;
                   _update(
                     context,
                     todo.copyWith(
-                      completeState: nextCompletState,
+                      completed: nextCompletState,
                     ),
                   );
                   if (nextCompletState.isCompleted) {
@@ -81,7 +81,7 @@ class TodoItem extends StatelessWidget with TodoDeleteDialogCreator {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: todo.completeState.isCompleted
+                    color: todo.completed.isCompleted
                         ? ColorPalette.rgb204.color
                         : Colors.black,
                   ),
@@ -94,7 +94,7 @@ class TodoItem extends StatelessWidget with TodoDeleteDialogCreator {
                     _update(
                       context,
                       todo.copyWith(
-                        importantState: todo.importantState.nextState,
+                        important: todo.important.nextState,
                       ),
                     );
                   },

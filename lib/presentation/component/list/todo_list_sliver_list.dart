@@ -4,19 +4,19 @@ import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_not
 import 'package:flutter_todo_app/presentation/component/list/todo_item.dart';
 
 class TodoListSliverList extends StatelessWidget {
-  final CompleteState completeState;
-  final ImportantState importantState;
+  final Completed completed;
+  final Important important;
   const TodoListSliverList({
     super.key,
-    required this.completeState,
-    required this.importantState,
+    required this.completed,
+    required this.important,
   });
 
   @override
   Widget build(BuildContext context) {
     var todoList = TodoModelInheritedNotifier.watch(context).get(
-      completeState: completeState,
-      importantState: importantState,
+      completed: completed,
+      important: important,
     );
     return SliverList.builder(
       itemCount: todoList.length,

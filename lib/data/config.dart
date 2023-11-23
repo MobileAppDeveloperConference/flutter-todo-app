@@ -2,33 +2,33 @@ import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/common/extensions.dart';
 
 class Config {
-  final ImportantState importantState;
+  final Important important;
   final bool isHiddenFinish;
 
-  bool get isImportant => importantState.isImportant;
+  bool get isImportant => important.isImportant;
 
   Config({
-    required this.importantState,
+    required this.important,
     required this.isHiddenFinish,
   });
 
   Config copyWith({
-    ImportantState? importantState,
+    Important? important,
     bool? isHiddenFinish,
   }) {
     return Config(
-      importantState: importantState ?? this.importantState,
+      important: important ?? this.important,
       isHiddenFinish: isHiddenFinish ?? this.isHiddenFinish,
     );
   }
 
   factory Config.fromJson(Map<String, dynamic> json) => Config(
-        importantState: ImportantState.values[json['importantState'] as int],
+        important: Important.values[json['important'] as int],
         isHiddenFinish: json['isHiddenFinish'] as bool,
       );
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'importantState': importantState.index,
+        'important': important.index,
         'isHiddenFinish': isHiddenFinish,
       };
 }

@@ -5,12 +5,12 @@ import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star
 
 class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool canAdd;
-  final ImportantState initialImportantState;
-  final Function(ImportantState importantState) onFinished;
+  final Important initialImportant;
+  final Function(Important important) onFinished;
   const TodoAddTaskAppBar({
     super.key,
     required this.canAdd,
-    required this.initialImportantState,
+    required this.initialImportant,
     required this.onFinished,
   });
 
@@ -22,7 +22,7 @@ class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
-  ImportantState? importantState;
+  Important? important;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    importantState ??= widget.initialImportantState;
+    important ??= widget.initialImportant;
     return Container(
       color: Colors.white,
       child: Align(
@@ -47,10 +47,10 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               ),
               const SizedBox(width: 8),
               TodoAppBarStarToggle(
-                importantState: importantState!,
+                important: important!,
                 onTap: () {
                   setState(() {
-                    importantState = importantState!.nextState;
+                    important = important!.nextState;
                   });
                 },
               ),
@@ -70,9 +70,8 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               ),
               const SizedBox(width: 26),
               InkWell(
-                onTap: widget.canAdd
-                    ? () => widget.onFinished(importantState!)
-                    : null,
+                onTap:
+                    widget.canAdd ? () => widget.onFinished(important!) : null,
                 child: Text(
                   '완료',
                   style: TextStyle(

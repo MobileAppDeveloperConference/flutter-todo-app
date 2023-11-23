@@ -27,11 +27,11 @@ class _TodoEditHeaderState extends State<TodoEditHeader> {
       child: Row(
         children: [
           TodoToggle(
-            completeState: editingTodo.completeState,
+            completed: editingTodo.completed,
             onTap: () {
               setState(() {
                 todo = editingTodo.copyWith(
-                  completeState: editingTodo.completeState.nextState,
+                  completed: editingTodo.completed.nextState,
                 );
                 TodoModelInheritedNotifier.read(context).update(todo: todo!);
               });
