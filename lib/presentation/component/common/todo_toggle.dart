@@ -20,6 +20,7 @@ class TodoToggle extends StatelessWidget {
             ? 'assets/images/icon_checked_2x.png'
             : 'assets/images/icon_not_checked_2x.png',
         scale: 2,
+        excludeFromSemantics: true,
       ),
     );
   }

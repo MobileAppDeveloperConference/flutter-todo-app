@@ -86,7 +86,7 @@ class TodoModel extends ChangeNotifier {
   // update method
   void updateHiddenFinish(bool isHiddenFinish) {
     config = config.copyWith(
-      isHiddenFinish: isHiddenFinish,
+      important: important,
     );
     _saveConfig();
   }

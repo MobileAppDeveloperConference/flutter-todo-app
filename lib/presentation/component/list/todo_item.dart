@@ -81,9 +81,9 @@ class TodoItem extends StatelessWidget with TodoDeleteDialogCreator {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: todo.completed.isCompleted
-                        ? ColorPalette.rgb204.color
-                        : Colors.black,
+                    color: todo.isNotCompleted
+                        ? Colors.black
+                        : ColorPalette.rgb204.color,
                   ),
                 ),
               ),
