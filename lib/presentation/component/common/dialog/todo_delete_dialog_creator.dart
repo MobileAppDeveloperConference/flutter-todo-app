@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
 import 'package:flutter_todo_app/data/todo.dart';
@@ -6,10 +8,11 @@ import 'package:flutter_todo_app/presentation/component/common/dialog/custom_dia
 import 'package:flutter_todo_app/presentation/inherited/todo_model_inherited_notifier.dart';
 
 mixin TodoDeleteDialogCreator {
-  void showDeleteDialog({
+  Future<bool> showDeleteDialog({
     required BuildContext context,
     required Todo todo,
   }) {
+    final completer = Completer<bool>();
     CustomDialog.show(
       context: context,
       title: '투두를 삭제할까요?',
@@ -23,6 +26,7 @@ mixin TodoDeleteDialogCreator {
             fontSize: 16,
           ),
           onTap: (context) {
+            completer.complete(false);
             Navigator.of(context).pop();
           },
         ),
@@ -35,10 +39,12 @@ mixin TodoDeleteDialogCreator {
           ),
           onTap: (context) {
             TodoModelInheritedNotifier.read(context).delete(todo: todo);
-            Navigator.of(context).pop();
+            completer.complete(true);
+            Navigator.of(context).pop(true);
           },
         ),
       ],
     );
+    return completer.future;
   }
 }
