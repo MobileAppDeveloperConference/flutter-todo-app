@@ -3,9 +3,10 @@ import 'package:flutter_todo_app/data/todo_repository.dart';
 
 class MockingTodoRepository implements TodoRepository {
   factory MockingTodoRepository.empty() =>
-      MockingTodoRepository._(initialTodoList: List.empty());
+      MockingTodoRepository._(initialTodoList: List.empty(growable: true));
+
   factory MockingTodoRepository.withTodoList(List<Todo> todoList) =>
-      MockingTodoRepository._(initialTodoList: todoList);
+      MockingTodoRepository._(initialTodoList: todoList.toList());
 
   List<Todo> initialTodoList;
 

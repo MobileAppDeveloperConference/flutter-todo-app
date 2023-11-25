@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/common/enums.dart';
-import 'package:flutter_todo_app/common/extensions.dart';
 import 'package:flutter_todo_app/presentation/component/common/todo_app_bar_star_toggle.dart';
 
 class TodoAddTaskAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -48,9 +47,9 @@ class _TodoAddTaskAppBarState extends State<TodoAddTaskAppBar> {
               const SizedBox(width: 8),
               TodoAppBarStarToggle(
                 important: important!,
-                onTap: () {
+                onTap: (nextImportant) {
                   setState(() {
-                    important = important!.nextState;
+                    important = nextImportant;
                   });
                 },
               ),

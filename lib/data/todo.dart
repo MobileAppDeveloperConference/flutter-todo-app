@@ -19,6 +19,9 @@ class Todo {
   bool get isNotCompleted => completed.isNotCompleted;
   bool get isImportant => important.isImportant;
 
+  Completed get nextCompleted => completed.next;
+  Important get nextImportant => important.next;
+
   bool isInCondition({
     required Completed completed,
     Important? important,

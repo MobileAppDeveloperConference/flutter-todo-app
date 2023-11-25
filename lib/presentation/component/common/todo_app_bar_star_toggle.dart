@@ -4,7 +4,7 @@ import 'package:flutter_todo_app/common/extensions.dart';
 
 class TodoAppBarStarToggle extends StatelessWidget {
   final Important important;
-  final VoidCallback onTap;
+  final Function(Important nextImportant) onTap;
   const TodoAppBarStarToggle({
     super.key,
     required this.important,
@@ -14,7 +14,7 @@ class TodoAppBarStarToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () => onTap(important.next),
       child: Image.asset(
         important.isImportant
             ? 'assets/images/icon_star_on_2x.png'

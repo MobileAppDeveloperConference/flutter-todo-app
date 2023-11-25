@@ -35,7 +35,9 @@ class TodoListAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: SizedBox(),
               ),
               GestureDetector(
-                onTap: () => todoModel.updateHiddenFinish(!isHiddenFinish),
+                onTap: () {
+                  todoModel.updateHiddenFinish(!isHiddenFinish);
+                },
                 child: Container(
                   width: 77,
                   height: 30,
