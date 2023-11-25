@@ -11,7 +11,7 @@ void main() {
     await tester.pumpWidgetInScaffold(
       TodoToggle(
         completed: Completed.completed,
-        onTap: () => didTap = true,
+        onTap: (_) => didTap = true,
       ),
     );
     final inkWellWidget = find.byType(InkWell);

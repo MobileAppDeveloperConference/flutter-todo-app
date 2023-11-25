@@ -19,14 +19,12 @@ extension ImportantExtension on Important {
   bool get isImportant => this == Important.important;
   bool get isNotImportant => this == Important.not;
 
-  Important get nextState =>
-      isNotImportant ? Important.important : Important.not;
+  Important get next => isNotImportant ? Important.important : Important.not;
 }
 
 extension CompletedExtension on Completed {
   bool get isCompleted => this == Completed.completed;
   bool get isNotCompleted => this == Completed.not;
 
-  Completed get nextState =>
-      isNotCompleted ? Completed.completed : Completed.not;
+  Completed get next => isNotCompleted ? Completed.completed : Completed.not;
 }

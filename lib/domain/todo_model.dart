@@ -32,16 +32,15 @@ class TodoModel extends ChangeNotifier {
     required Important important,
     String? description,
   }) {
-    todoList = [
-      ...todoList,
+    todoList.add(
       Todo(
         completed: Completed.not,
         important: important,
         title: title,
         description: description ?? '',
         createdAt: DateTime.now(),
-      )
-    ];
+      ),
+    );
     _saveTodo();
   }
 
@@ -70,9 +69,7 @@ class TodoModel extends ChangeNotifier {
 
   // delete method
   void delete({required Todo todo}) {
-    todoList = todoList
-        .where((e) => !e.createdAt.isAtSameMomentAs(todo.createdAt))
-        .toList();
+    todoList.removeWhere((e) => e.createdAt.isAtSameMomentAs(todo.createdAt));
     _saveTodo();
   }
 
@@ -86,7 +83,7 @@ class TodoModel extends ChangeNotifier {
   // update method
   void updateHiddenFinish(bool isHiddenFinish) {
     config = config.copyWith(
-      important: important,
+      isHiddenFinish: isHiddenFinish,
     );
     _saveConfig();
   }

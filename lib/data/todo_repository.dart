@@ -24,7 +24,7 @@ class TodoRepositoryImpl implements TodoRepository {
           .map((todoString) => Todo.fromJson(jsonDecode(todoString)))
           .toList();
     } else {
-      return List.empty();
+      return List.empty(growable: true);
     }
   }
 
