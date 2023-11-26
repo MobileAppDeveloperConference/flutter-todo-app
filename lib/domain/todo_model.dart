@@ -41,7 +41,7 @@ class TodoModel extends ChangeNotifier {
         createdAt: DateTime.now(),
       ),
     );
-    _saveTodo();
+    _saveAndNotifyTodo();
   }
 
   // read method
@@ -64,16 +64,16 @@ class TodoModel extends ChangeNotifier {
     if (targetIndex != -1) {
       todoList[targetIndex] = todo;
     }
-    _saveTodo();
+    _saveAndNotifyTodo();
   }
 
   // delete method
   void delete({required Todo todo}) {
     todoList.removeWhere((e) => e.createdAt.isAtSameMomentAs(todo.createdAt));
-    _saveTodo();
+    _saveAndNotifyTodo();
   }
 
-  void _saveTodo() {
+  void _saveAndNotifyTodo() {
     todoRepository.save(todoList: todoList);
     notifyListeners();
   }
@@ -85,17 +85,17 @@ class TodoModel extends ChangeNotifier {
     config = config.copyWith(
       isHiddenFinish: isHiddenFinish,
     );
-    _saveConfig();
+    _saveAndNotifyConfig();
   }
 
   void updateImportant(Important important) {
     config = config.copyWith(
       important: important,
     );
-    _saveConfig();
+    _saveAndNotifyConfig();
   }
 
-  void _saveConfig() {
+  void _saveAndNotifyConfig() {
     configRepository.save(config: config);
     notifyListeners();
   }
